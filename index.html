@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE MIDNIGHT CLUB - By : Nerva Nier</title>
+    <title>THE MIDNIGHT CLUB - By: Nerva Nier</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Exo+2:wght@300;500;700&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;500;700&family=Montserrat:wght@400;600;800&family=Roboto+Mono:wght@300;400;600&family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,196 +14,76 @@
         }
 
         :root {
-            --tokyo-red: #ff2a2a;
-            --tokyo-blue: #2a7aff;
-            --tokyo-purple: #8a2aff;
-            --tokyo-pink: #ff2a8a;
-            --tokyo-cyan: #2affff;
+            --neon-red: #ff0033;
+            --neon-blue: #0066ff;
+            --neon-purple: #9900ff;
+            --neon-cyan: #00ffff;
             --dark-bg: #0a0a14;
-            --darker-bg: #05050f;
-            --card-bg: rgba(20, 20, 40, 0.85);
-            --text-light: #ffffff;
-            --text-glow: rgba(255, 255, 255, 0.9);
-            --border-glow: rgba(255, 42, 42, 0.4);
-            --accent-yellow: #ffd42a;
+            --card-bg: rgba(20, 20, 35, 0.9);
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8d8;
+            --border-glow: rgba(255, 0, 51, 0.4);
+            --shadow-glow: rgba(0, 102, 255, 0.3);
+            --accent-gold: #ffd700;
         }
 
         body {
-            background: linear-gradient(135deg, #0a0a14 0%, #05050f 50%, #15152a 100%);
-            color: var(--text-light);
+            background: linear-gradient(135deg, #0a0a14 0%, #151525 50%, #0a0a14 100%);
+            color: var(--text-primary);
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
         }
 
-        /* Tokyo Street Grid */
-        .tokyo-grid {
+        /* Neon Grid Background */
+        .neon-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(255, 42, 42, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(42, 122, 255, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
+                linear-gradient(rgba(255, 0, 51, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 102, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: -3;
-            opacity: 0.3;
+            opacity: 0.4;
         }
 
-        /* Floating Kanji Characters */
-        .kanji-particle {
-            position: fixed;
-            font-size: 2rem;
-            color: rgba(255, 42, 42, 0.1);
-            z-index: -2;
-            font-family: serif;
-            user-select: none;
-            pointer-events: none;
-            animation: kanjiFloat 20s infinite linear;
-        }
-
-        @keyframes kanjiFloat {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-        }
-
-        /* Neon Signs */
-        .neon-sign {
-            position: fixed;
-            width: 150px;
-            height: 40px;
-            background: rgba(255, 42, 42, 0.1);
-            border: 2px solid rgba(255, 42, 42, 0.3);
-            z-index: -2;
-            opacity: 0.2;
-            box-shadow: 0 0 20px rgba(255, 42, 42, 0.2);
-            animation: neonPulse 4s infinite alternate;
-        }
-
-        .neon-sign::before {
-            content: '営業中';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: serif;
-            font-size: 1.2rem;
-            color: rgba(255, 42, 42, 0.5);
-        }
-
-        @keyframes neonPulse {
-            0%, 100% { opacity: 0.2; box-shadow: 0 0 20px rgba(255, 42, 42, 0.2); }
-            50% { opacity: 0.4; box-shadow: 0 0 30px rgba(255, 42, 42, 0.4); }
-        }
-
-        /* Sakura Petals */
-        .sakura {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 182, 193, 0.7);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            z-index: -2;
-            opacity: 0.7;
-            animation: sakuraFall 15s infinite linear;
-            filter: blur(0.5px);
-        }
-
-        @keyframes sakuraFall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.7; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* Glowing Orbs */
-        .glowing-orb {
-            position: fixed;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--tokyo-blue), transparent);
-            filter: blur(20px);
-            z-index: -2;
-            opacity: 0.1;
-            animation: orbFloat 30s infinite linear;
-        }
-
-        @keyframes orbFloat {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(100px, 50px) scale(1.2); }
-            66% { transform: translate(-50px, 100px) scale(0.8); }
-            100% { transform: translate(0, 0) scale(1); }
-        }
-
-        /* Traffic Light Effect */
-        .traffic-light {
-            position: fixed;
-            width: 100px;
-            height: 200px;
-            right: 30px;
-            bottom: 30px;
-            z-index: -1;
-            opacity: 0.1;
-        }
-
-        .light {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin: 10px auto;
-            box-shadow: 0 0 20px currentColor;
-        }
-
-        .red-light { background: var(--tokyo-red); animation: redLight 4s infinite; }
-        .yellow-light { background: var(--accent-yellow); animation: yellowLight 4s infinite; }
-        .blue-light { background: var(--tokyo-blue); animation: blueLight 4s infinite; }
-
-        @keyframes redLight {
-            0%, 40% { opacity: 0.3; }
-            41%, 100% { opacity: 1; }
-        }
-
-        @keyframes yellowLight {
-            0%, 40% { opacity: 0.3; }
-            41%, 70% { opacity: 1; }
-            71%, 100% { opacity: 0.3; }
-        }
-
-        @keyframes blueLight {
-            0%, 70% { opacity: 0.3; }
-            71%, 100% { opacity: 1; }
-        }
-
-        /* Rain Effect */
-        .rain {
+        /* Holographic Lines */
+        .hologram-line {
             position: fixed;
             width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.05;
-            pointer-events: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            z-index: -2;
+            opacity: 0.1;
+            animation: scanLine 3s linear infinite;
         }
 
-        .raindrop {
+        @keyframes scanLine {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        /* Floating Particles */
+        .glow-particle {
             position: absolute;
-            width: 1px;
-            height: 20px;
-            background: linear-gradient(to bottom, transparent, var(--tokyo-blue));
-            animation: rainFall 1.5s linear infinite;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            z-index: -2;
+            opacity: 0;
+            animation: particleFloat 15s infinite linear;
+            filter: blur(1px);
         }
 
-        @keyframes rainFall {
-            0% { transform: translateY(-100px); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
+        @keyframes particleFloat {
+            0% { transform: translate(0, 0) scale(0); opacity: 0; }
+            10% { opacity: 0.6; transform: scale(1); }
+            90% { opacity: 0.6; }
+            100% { transform: translate(100px, 100px) scale(0); opacity: 0; }
         }
 
         /* Loading Animation */
@@ -222,49 +102,40 @@
             transition: opacity 0.8s ease;
         }
 
-        .tokyo-loader {
+        .cyber-loader {
             position: relative;
-            width: 200px;
-            height: 200px;
-            margin-bottom: 40px;
+            width: 180px;
+            height: 180px;
+            margin-bottom: 30px;
         }
 
-        .loader-circle {
+        .loader-ring {
             position: absolute;
             width: 100%;
             height: 100%;
             border: 3px solid transparent;
-            border-top-color: var(--tokyo-red);
+            border-top: 3px solid var(--neon-red);
             border-radius: 50%;
             animation: spin 2s linear infinite;
         }
 
-        .loader-circle:nth-child(2) {
+        .loader-ring:nth-child(2) {
             width: 70%;
             height: 70%;
             top: 15%;
             left: 15%;
-            border-top-color: var(--tokyo-blue);
+            border-top-color: var(--neon-blue);
             animation-duration: 1.5s;
             animation-direction: reverse;
         }
 
-        .loader-circle:nth-child(3) {
+        .loader-ring:nth-child(3) {
             width: 40%;
             height: 40%;
             top: 30%;
             left: 30%;
-            border-top-color: var(--accent-yellow);
+            border-top-color: var(--neon-cyan);
             animation-duration: 1s;
-        }
-
-        .loader-particle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: var(--tokyo-red);
-            border-radius: 50%;
-            animation: particleOrbit 3s linear infinite;
         }
 
         @keyframes spin {
@@ -272,51 +143,44 @@
             100% { transform: rotate(360deg); }
         }
 
-        @keyframes particleOrbit {
-            0% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
-            100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
-        }
-
-        .loading-text {
+        .loading-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--text-light);
-            text-shadow: 
-                0 0 10px var(--tokyo-red),
-                0 0 20px var(--tokyo-red),
-                0 0 30px var(--tokyo-blue);
-            position: relative;
+            letter-spacing: 6px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--neon-red), var(--neon-blue), var(--neon-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 0, 51, 0.5);
         }
 
-        .loading-subtext {
+        .loading-subtitle {
             font-family: 'Exo 2', sans-serif;
             font-size: 1.2rem;
-            color: var(--tokyo-blue);
+            color: var(--neon-cyan);
             letter-spacing: 3px;
-            margin-top: 15px;
-            text-shadow: 0 0 10px var(--tokyo-blue);
+            text-transform: uppercase;
         }
 
         /* Header & Navigation */
         header {
-            background: rgba(10, 10, 20, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.2rem 3rem;
+            background: rgba(15, 15, 25, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1.2rem 2.5rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 5px 20px rgba(255, 42, 42, 0.2);
-            border-bottom: 2px solid var(--tokyo-red);
+            box-shadow: 0 5px 25px rgba(255, 0, 51, 0.2);
+            border-bottom: 2px solid var(--neon-red);
         }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -328,45 +192,42 @@
         }
 
         .logo-img {
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--tokyo-red);
-            box-shadow: 0 0 15px var(--tokyo-red);
+            border: 2px solid var(--neon-red);
+            box-shadow: 0 0 20px var(--neon-red);
             transition: all 0.3s;
-            filter: brightness(1.1);
-            animation: logoGlow 3s infinite alternate;
+            animation: logoPulse 3s infinite alternate;
         }
 
-        @keyframes logoGlow {
-            0% { box-shadow: 0 0 15px var(--tokyo-red); }
-            100% { box-shadow: 0 0 25px var(--tokyo-blue), 0 0 15px var(--tokyo-red); }
+        @keyframes logoPulse {
+            0% { box-shadow: 0 0 20px var(--neon-red); }
+            100% { box-shadow: 0 0 30px var(--neon-blue), 0 0 20px var(--neon-red); }
         }
 
         .logo-img:hover {
-            transform: scale(1.1);
+            transform: rotate(15deg) scale(1.1);
             animation: none;
-            box-shadow: 0 0 30px var(--tokyo-cyan);
-            border-color: var(--tokyo-cyan);
+            box-shadow: 0 0 40px var(--neon-cyan);
+            border-color: var(--neon-cyan);
         }
 
         .logo-text {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
             font-weight: 900;
-            text-transform: uppercase;
             letter-spacing: 3px;
-            color: var(--text-light);
-            text-shadow: 
-                0 0 10px var(--tokyo-red),
-                0 0 20px rgba(255, 42, 42, 0.5);
+            text-transform: uppercase;
+            color: var(--text-primary);
+            text-shadow: 0 0 15px var(--neon-red);
         }
 
         .logo-subtext {
             font-family: 'Exo 2', sans-serif;
             font-size: 0.8rem;
-            color: var(--tokyo-blue);
+            color: var(--neon-cyan);
             letter-spacing: 2px;
             margin-top: 3px;
         }
@@ -378,7 +239,7 @@
         }
 
         nav a {
-            color: var(--text-light);
+            color: var(--text-primary);
             text-decoration: none;
             font-family: 'Exo 2', sans-serif;
             font-weight: 600;
@@ -388,6 +249,7 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            border: 1px solid transparent;
         }
 
         nav a::before {
@@ -397,7 +259,7 @@
             left: -100%;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--tokyo-red), transparent);
+            background: linear-gradient(90deg, transparent, var(--neon-red), transparent);
             transition: left 0.5s;
         }
 
@@ -406,16 +268,17 @@
         }
 
         nav a:hover {
-            color: var(--tokyo-red);
-            background: rgba(255, 42, 42, 0.1);
+            color: var(--neon-red);
+            background: rgba(255, 0, 51, 0.1);
+            border: 1px solid rgba(255, 0, 51, 0.3);
         }
 
         .mobile-menu-btn {
             display: none;
-            background: var(--tokyo-red);
+            background: linear-gradient(45deg, var(--neon-red), var(--neon-purple));
             border: none;
             color: white;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
             padding: 10px;
             border-radius: 4px;
@@ -423,14 +286,14 @@
         }
 
         .mobile-menu-btn:hover {
-            background: var(--tokyo-blue);
             transform: scale(1.1);
+            box-shadow: 0 0 20px var(--neon-red);
         }
 
         /* Hero Section */
         .hero {
             position: relative;
-            height: 700px;
+            height: 600px;
             overflow: hidden;
             margin-bottom: 4rem;
             display: flex;
@@ -443,18 +306,17 @@
             width: 100%;
             height: 100%;
             background: 
-                linear-gradient(rgba(10, 10, 20, 0.7), rgba(10, 10, 20, 0.8)),
+                linear-gradient(rgba(10, 10, 20, 0.8), rgba(10, 10, 20, 0.9)),
                 url('https://i.imgur.com/xRZhmrk.jpeg');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
             z-index: -1;
-            animation: bannerPan 20s infinite alternate ease-in-out;
+            animation: bannerShift 20s infinite alternate ease-in-out;
         }
 
-        @keyframes bannerPan {
+        @keyframes bannerShift {
             0% { transform: scale(1) translateX(0); }
-            100% { transform: scale(1.05) translateX(20px); }
+            100% { transform: scale(1.05) translateX(10px); }
         }
 
         .hero-content {
@@ -463,54 +325,53 @@
             width: 90%;
             max-width: 900px;
             padding: 3rem;
-            background: rgba(20, 20, 40, 0.85);
+            background: rgba(25, 25, 40, 0.85);
             border-radius: 15px;
             backdrop-filter: blur(10px);
-            border: 2px solid var(--tokyo-red);
+            border: 2px solid var(--neon-red);
             box-shadow: 
-                0 0 40px rgba(255, 42, 42, 0.3),
-                inset 0 0 20px rgba(42, 122, 255, 0.1);
-            animation: contentFloat 6s infinite alternate ease-in-out;
-        }
-
-        @keyframes contentFloat {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
+                0 0 40px rgba(255, 0, 51, 0.3),
+                inset 0 0 20px rgba(0, 102, 255, 0.1);
         }
 
         .hero-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 4px;
-            color: var(--text-light);
+            color: var(--text-primary);
             text-shadow: 
-                0 0 10px var(--tokyo-red),
-                0 0 20px var(--tokyo-red),
-                0 0 30px var(--tokyo-blue);
+                0 0 10px var(--neon-red),
+                0 0 20px var(--neon-red),
+                0 0 30px var(--neon-blue);
             line-height: 1.2;
-            animation: titleGlow 3s infinite alternate;
-        }
-
-        @keyframes titleGlow {
-            0% { text-shadow: 0 0 10px var(--tokyo-red), 0 0 20px var(--tokyo-red), 0 0 30px var(--tokyo-blue); }
-            100% { text-shadow: 0 0 15px var(--tokyo-blue), 0 0 25px var(--tokyo-red), 0 0 35px var(--tokyo-purple); }
         }
 
         .hero-subtitle {
-            font-family: 'Exo 2', sans-serif;
-            font-size: 1.3rem;
-            color: var(--tokyo-blue);
-            margin-bottom: 2rem;
+            font-family: 'Kanit', sans-serif;
+            font-size: 1.4rem;
+            color: var(--neon-cyan);
             letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--tokyo-blue);
-            animation: subtitlePulse 2s infinite alternate;
+            text-shadow: 0 0 10px var(--neon-cyan);
         }
 
-        @keyframes subtitlePulse {
-            0% { opacity: 0.8; }
-            100% { opacity: 1; }
+        .creator-tag {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 8px 20px;
+            background: rgba(153, 0, 255, 0.2);
+            border-radius: 20px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--neon-purple);
+            border: 1px solid var(--neon-purple);
+            animation: tagGlow 2s infinite alternate;
+        }
+
+        @keyframes tagGlow {
+            0% { box-shadow: 0 0 10px rgba(153, 0, 255, 0.3); }
+            100% { box-shadow: 0 0 20px rgba(153, 0, 255, 0.6); }
         }
 
         /* Main Content */
@@ -533,14 +394,8 @@
             padding-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 3px;
-            color: var(--tokyo-red);
-            text-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
-            animation: sectionTitleGlow 4s infinite alternate;
-        }
-
-        @keyframes sectionTitleGlow {
-            0% { text-shadow: 0 0 10px rgba(255, 42, 42, 0.5); }
-            100% { text-shadow: 0 0 15px rgba(255, 42, 42, 0.8), 0 0 20px rgba(42, 122, 255, 0.5); }
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
         }
 
         .section-title::after {
@@ -551,14 +406,8 @@
             transform: translateX(-50%);
             width: 150px;
             height: 3px;
-            background: linear-gradient(90deg, var(--tokyo-red), var(--tokyo-blue));
-            box-shadow: 0 0 10px var(--tokyo-red);
-            animation: linePulse 2s infinite alternate;
-        }
-
-        @keyframes linePulse {
-            0% { width: 150px; opacity: 0.7; }
-            100% { width: 200px; opacity: 1; }
+            background: linear-gradient(90deg, var(--neon-red), var(--neon-blue));
+            box-shadow: 0 0 10px var(--neon-red);
         }
 
         /* Resources Section */
@@ -569,53 +418,57 @@
         }
 
         .resource-card {
-            background: rgba(25, 25, 45, 0.9);
+            background: rgba(30, 30, 45, 0.9);
             border-radius: 12px;
             overflow: hidden;
             transition: all 0.4s;
             box-shadow: 
                 0 8px 25px rgba(0, 0, 0, 0.4),
-                inset 0 0 15px rgba(255, 42, 42, 0.05);
-            border: 1px solid rgba(255, 42, 42, 0.3);
+                inset 0 0 15px rgba(255, 0, 51, 0.05);
+            border: 1px solid rgba(255, 0, 51, 0.3);
             position: relative;
-            cursor: pointer;
             animation: cardFloat 6s infinite alternate ease-in-out;
-            animation-delay: calc(var(--i) * 0.2s);
+            animation-delay: calc(var(--card-index, 0) * 0.2s);
         }
 
         @keyframes cardFloat {
             0% { transform: translateY(0); }
-            100% { transform: translateY(-5px); }
+            100% { transform: translateY(-10px); }
         }
 
         .resource-card:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-15px) scale(1.02);
             box-shadow: 
-                0 15px 35px rgba(255, 42, 42, 0.3),
-                0 0 25px rgba(42, 122, 255, 0.2);
-            border-color: var(--tokyo-blue);
+                0 15px 35px rgba(255, 0, 51, 0.4),
+                0 0 25px rgba(0, 102, 255, 0.3);
+            border-color: var(--neon-cyan);
             animation: none;
         }
 
         .resource-icon {
-            background: rgba(42, 122, 255, 0.15);
+            background: rgba(0, 102, 255, 0.15);
             height: 90px;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 2.5rem;
-            color: var(--tokyo-blue);
+            color: var(--neon-blue);
             position: relative;
             overflow: hidden;
         }
 
-        .resource-icon i {
-            animation: iconFloat 3s infinite alternate ease-in-out;
+        .resource-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0, 102, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
         }
 
-        @keyframes iconFloat {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-5px); }
+        .resource-card:hover .resource-icon::before {
+            transform: translateX(100%);
         }
 
         .resource-content {
@@ -624,19 +477,19 @@
 
         .resource-content h3 {
             margin-bottom: 1rem;
-            color: var(--tokyo-red);
+            color: var(--neon-red);
             font-size: 1.5rem;
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 0, 51, 0.5);
         }
 
         .resource-content p {
-            color: var(--text-light);
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
             line-height: 1.6;
             font-size: 1rem;
-            opacity: 0.9;
         }
 
         .resource-btn {
@@ -644,7 +497,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: linear-gradient(45deg, var(--tokyo-red), var(--tokyo-purple));
+            background: linear-gradient(45deg, var(--neon-red), var(--neon-purple));
             color: white;
             padding: 10px 24px;
             border-radius: 6px;
@@ -677,27 +530,21 @@
         }
 
         .resource-btn:hover {
-            background: linear-gradient(45deg, var(--tokyo-purple), var(--tokyo-blue));
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 5px 20px rgba(42, 122, 255, 0.6);
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 102, 255, 0.6);
         }
 
         /* Contacts Section */
         .contacts-section {
             padding: 4rem 3rem;
-            background: rgba(25, 25, 45, 0.9);
+            background: rgba(30, 30, 45, 0.9);
             border-radius: 15px;
-            border: 2px solid var(--tokyo-blue);
+            border: 2px solid var(--neon-blue);
             box-shadow: 
-                0 0 30px rgba(42, 122, 255, 0.3),
-                inset 0 0 20px rgba(255, 42, 42, 0.1);
+                0 0 30px rgba(0, 102, 255, 0.3),
+                inset 0 0 20px rgba(255, 0, 51, 0.1);
             margin: 4rem 0;
-            animation: contactSectionGlow 4s infinite alternate;
-        }
-
-        @keyframes contactSectionGlow {
-            0% { box-shadow: 0 0 30px rgba(42, 122, 255, 0.3), inset 0 0 20px rgba(255, 42, 42, 0.1); }
-            100% { box-shadow: 0 0 40px rgba(42, 122, 255, 0.5), inset 0 0 25px rgba(255, 42, 42, 0.2); }
         }
 
         .contacts-grid {
@@ -708,85 +555,71 @@
         }
 
         .contact-card {
-            background: rgba(20, 20, 40, 0.9);
+            background: rgba(25, 25, 40, 0.9);
             padding: 2.5rem 2rem;
             border-radius: 10px;
             text-align: center;
             transition: all 0.4s;
-            border: 1px solid rgba(255, 42, 42, 0.3);
+            border: 1px solid rgba(255, 0, 51, 0.3);
             position: relative;
             overflow: hidden;
-            animation: contactCardFloat 5s infinite alternate ease-in-out;
-            animation-delay: calc(var(--j) * 0.3s);
         }
 
-        @keyframes contactCardFloat {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-5px); }
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--neon-red), var(--neon-blue));
         }
 
         .contact-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            border-color: var(--tokyo-blue);
-            box-shadow: 0 10px 30px rgba(42, 122, 255, 0.4);
-            animation: none;
+            transform: translateY(-8px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
         }
 
         .contact-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
-            color: var(--tokyo-blue);
+            color: var(--neon-blue);
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            animation: contactTitleGlow 3s infinite alternate;
-        }
-
-        @keyframes contactTitleGlow {
-            0% { text-shadow: 0 0 5px var(--tokyo-blue); }
-            100% { text-shadow: 0 0 10px var(--tokyo-blue), 0 0 15px var(--tokyo-cyan); }
+            text-shadow: 0 0 10px var(--neon-blue);
         }
 
         .contact-link {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            color: var(--tokyo-red);
+            color: var(--neon-red);
             text-decoration: none;
             font-size: 1.1rem;
             font-family: 'Exo 2', sans-serif;
             font-weight: 600;
             padding: 10px 22px;
             border-radius: 6px;
-            background: rgba(255, 42, 42, 0.1);
-            border: 1px solid var(--tokyo-red);
+            background: rgba(255, 0, 51, 0.1);
+            border: 1px solid var(--neon-red);
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-link i {
-            animation: iconPulse 2s infinite alternate;
-        }
-
-        @keyframes iconPulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
         }
 
         .contact-link:hover {
-            background: var(--tokyo-red);
+            background: var(--neon-red);
             color: white;
             transform: scale(1.05);
-            box-shadow: 0 0 25px var(--tokyo-red);
+            box-shadow: 0 0 25px var(--neon-red);
         }
 
         /* Footer */
         footer {
-            background: linear-gradient(to bottom, rgba(10, 10, 20, 0.95), rgba(5, 5, 15, 1));
+            background: linear-gradient(to bottom, rgba(15, 15, 25, 0.95), rgba(5, 5, 15, 1));
             padding: 3rem 2rem 1.5rem;
             margin-top: 5rem;
-            border-top: 2px solid var(--tokyo-red);
+            border-top: 2px solid var(--neon-red);
             position: relative;
         }
 
@@ -797,13 +630,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--tokyo-red), var(--tokyo-blue), transparent);
-            animation: footerGlow 3s infinite alternate;
-        }
-
-        @keyframes footerGlow {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
+            background: linear-gradient(90deg, transparent, var(--neon-red), var(--neon-blue), transparent);
         }
 
         .footer-content {
@@ -835,7 +662,7 @@
         .footer-links h3 {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.3rem;
-            color: var(--tokyo-blue);
+            color: var(--neon-cyan);
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -847,17 +674,10 @@
 
         .footer-links li {
             margin-bottom: 0.8rem;
-            animation: linkFloat 5s infinite alternate ease-in-out;
-            animation-delay: calc(var(--k) * 0.2s);
-        }
-
-        @keyframes linkFloat {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-5px); }
         }
 
         .footer-links a {
-            color: var(--text-light);
+            color: var(--text-secondary);
             text-decoration: none;
             font-family: 'Exo 2', sans-serif;
             transition: all 0.3s;
@@ -865,39 +685,35 @@
         }
 
         .footer-links a:hover {
-            color: var(--tokyo-red);
+            color: var(--neon-red);
             padding-left: 5px;
-            text-shadow: 0 0 10px var(--tokyo-red);
         }
 
         .copyright {
             text-align: center;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 42, 42, 0.2);
-            color: var(--text-light);
+            border-top: 1px solid rgba(255, 0, 51, 0.2);
+            color: var(--text-secondary);
             font-family: 'Exo 2', sans-serif;
             font-size: 0.85rem;
-            opacity: 0.7;
-            animation: copyrightGlow 4s infinite alternate;
         }
 
-        @keyframes copyrightGlow {
-            0% { opacity: 0.5; }
-            100% { opacity: 0.8; }
+        .signature {
+            font-family: 'Roboto Mono', monospace;
+            color: var(--neon-purple);
+            font-weight: 600;
+            margin-top: 5px;
+            text-shadow: 0 0 10px rgba(153, 0, 255, 0.5);
         }
 
         /* Responsive */
         @media (max-width: 1024px) {
             .hero-title {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
             }
             
             .section-title {
                 font-size: 1.8rem;
-            }
-            
-            .kanji-particle, .neon-sign, .sakura {
-                display: none;
             }
         }
 
@@ -912,7 +728,7 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 80px);
-                background: rgba(10, 10, 20, 0.98);
+                background: rgba(15, 15, 25, 0.98);
                 backdrop-filter: blur(20px);
                 flex-direction: column;
                 align-items: center;
@@ -928,7 +744,7 @@
             }
 
             .hero-title {
-                font-size: 2.2rem;
+                font-size: 2rem;
                 letter-spacing: 3px;
             }
             
@@ -956,10 +772,6 @@
             .footer-links {
                 text-align: center;
             }
-            
-            .traffic-light {
-                display: none;
-            }
         }
 
         @media (max-width: 480px) {
@@ -968,14 +780,14 @@
             }
             
             .hero-title {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             
             .hero-content {
                 padding: 2rem;
             }
             
-            .loading-text {
+            .loading-title {
                 font-size: 2rem;
             }
             
@@ -990,36 +802,21 @@
     </style>
 </head>
 <body>
-    <!-- Tokyo Grid Background -->
-    <div class="tokyo-grid"></div>
-    
-    <!-- Traffic Light -->
-    <div class="traffic-light">
-        <div class="light red-light"></div>
-        <div class="light yellow-light"></div>
-        <div class="light blue-light"></div>
-    </div>
-    
-    <!-- Glowing Orbs -->
-    <div class="glowing-orb" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
-    <div class="glowing-orb" style="top: 60%; right: 15%; animation-delay: -10s; background: radial-gradient(circle, var(--tokyo-red), transparent);"></div>
-    <div class="glowing-orb" style="bottom: 30%; left: 20%; animation-delay: -20s; background: radial-gradient(circle, var(--tokyo-purple), transparent);"></div>
-
-    <!-- Rain Effect -->
-    <div class="rain" id="rainContainer"></div>
+    <!-- Background Elements -->
+    <div class="neon-grid"></div>
+    <div class="hologram-line" style="animation-delay: 0s;"></div>
+    <div class="hologram-line" style="animation-delay: 1s; top: 30%;"></div>
+    <div class="hologram-line" style="animation-delay: 2s; top: 60%;"></div>
 
     <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="tokyo-loader">
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-particle"></div>
-            <div class="loader-particle" style="animation-delay: -1.5s;"></div>
-            <div class="loader-particle" style="animation-delay: -1s;"></div>
+        <div class="cyber-loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
         </div>
-        <div class="loading-text">THE MIDNIGHT CLUB</div>
-        <div class="loading-subtext">TOKYO MOST WANTED</div>
+        <div class="loading-title">THE MIDNIGHT CLUB</div>
+        <div class="loading-subtitle">BY: NERVA NIER</div>
     </div>
 
     <!-- Header -->
@@ -1029,7 +826,7 @@
                 <img src="https://i.imgur.com/7XGH14E.jpeg" alt="Midnight Club" class="logo-img">
                 <div>
                     <div class="logo-text">THE MIDNIGHT CLUB</div>
-                    <div class="logo-subtext">TOKYO MOST WANTED</div>
+                    <div class="logo-subtext">BY: NERVA NIER</div>
                 </div>
             </a>
             
@@ -1052,7 +849,8 @@
         <div class="hero-banner"></div>
         <div class="hero-content">
             <h1 class="hero-title">THE MIDNIGHT CLUB</h1>
-            <div class="hero-subtitle">TOKYO MOST WANTED</div>
+            <div class="hero-subtitle">DIGITAL DESIGN COLLECTIVE</div>
+            <div class="creator-tag">BY: NERVA NIER</div>
         </div>
     </section>
 
@@ -1060,41 +858,41 @@
     <div class="container">
         <!-- Resources Section -->
         <section id="resources">
-            <h2 class="section-title">MIDNIGHT RESOURCES</h2>
+            <h2 class="section-title">PREMIUM RESOURCES</h2>
             <div class="resources-grid">
-                <div class="resource-card" style="--i: 0;">
+                <div class="resource-card" style="--card-index: 0;">
                     <div class="resource-icon">
                         <i class="fas fa-gamepad"></i>
                     </div>
                     <div class="resource-content">
                         <h3>BAHAN NIER</h3>
-                        <p>Koleksi bahan desain premium dengan tema futuristic Tokyo. Perfect untuk project dengan nuansa urban nightlife.</p>
+                        <p>Koleksi bahan desain premium dengan tema futuristik dan cyberpunk. Perfect untuk proyek digital yang membutuhkan sentuhan modern.</p>
                         <a href="https://drive.google.com/drive/folders/11kNcJiF9dfRWJadE4CEDYcYvDHfFw9TR" class="resource-btn" target="_blank">
                             <i class="fas fa-external-link-alt"></i> ACCESS DRIVE
                         </a>
                     </div>
                 </div>
                 
-                <div class="resource-card" style="--i: 1;">
+                <div class="resource-card" style="--card-index: 1;">
                     <div class="resource-icon">
                         <i class="fas fa-crown"></i>
                     </div>
                     <div class="resource-content">
                         <h3>IPV PRINCE RYUUBANN</h3>
-                        <p>Asset eksklusif untuk desain premium. Preset dan template high-quality untuk project terbaik.</p>
+                        <p>Asset eksklusif untuk desain premium dengan kualitas tinggi. Preset dan template yang dioptimalkan untuk hasil maksimal.</p>
                         <a href="https://drive.google.com/drive/folders/1rvyq8yL0UseNg81Bm4oiA1DG249CyIN_" class="resource-btn" target="_blank">
                             <i class="fas fa-external-link-alt"></i> ACCESS DRIVE
                         </a>
                     </div>
                 </div>
                 
-                <div class="resource-card" style="--i: 2;">
+                <div class="resource-card" style="--card-index: 2;">
                     <div class="resource-icon">
                         <i class="fas fa-gem"></i>
                     </div>
                     <div class="resource-content">
                         <h3>BAHAN PRINCE RYUUBANN</h3>
-                        <p>Koleksi lengkap bahan desain untuk kebutuhan kreatif. Resource premium untuk hasil maksimal.</p>
+                        <p>Koleksi lengkap bahan desain untuk semua kebutuhan kreatif. Resource premium yang terus diperbarui.</p>
                         <a href="https://drive.google.com/drive/folders/14JOw7Il6U_IcYFg9jJD1ExigGp4qnajX" class="resource-btn" target="_blank">
                             <i class="fas fa-external-link-alt"></i> ACCESS DRIVE
                         </a>
@@ -1106,23 +904,23 @@
         <!-- Contacts Section -->
         <section id="contacts">
             <div class="contacts-section">
-                <h2 class="section-title">MIDNIGHT CONTACTS</h2>
+                <h2 class="section-title">CONTACT CREATOR</h2>
                 <div class="contacts-grid">
-                    <div class="contact-card" style="--j: 0;">
+                    <div class="contact-card">
                         <h3 class="contact-title">THE MIDNIGHT KING</h3>
-                        <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 1rem; opacity: 0.9;">Untuk konsultasi project premium</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem;">Untuk konsultasi project premium & kolaborasi</p>
                         <a href="https://wa.me/6285814101294" class="contact-link" target="_blank">
                             <i class="fab fa-whatsapp"></i>
                             CONTACT NERVA
                         </a>
                     </div>
                     
-                    <div class="contact-card" style="--j: 1;">
+                    <div class="contact-card">
                         <h3 class="contact-title">THE CIELO PRINCE</h3>
-                        <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 1rem; opacity: 0.9;">Untuk informasi & kolaborasi</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem;">Untuk informasi & dukungan teknis</p>
                         <a href="https://wa.me/6285135412495" class="contact-link" target="_blank">
                             <i class="fab fa-whatsapp"></i>
-                            CONTACT RYUU
+                            CONTACT PRINCE
                         </a>
                     </div>
                 </div>
@@ -1135,26 +933,27 @@
         <div class="footer-content">
             <div class="footer-logo">
                 <div class="logo">
-                    <img src="https://i.imgur.com/7XGH14E.jpeg" alt="Midnight Club" class="logo-img" style="width: 50px; height: 50px;">
+                    <img src="https://i.imgur.com/7XGH14E.jpeg" alt="Midnight Club" class="logo-img" style="width: 45px; height: 45px;">
                     <div>
                         <div class="logo-text">THE MIDNIGHT CLUB</div>
-                        <div class="logo-subtext">BY NERVA NIER </div>
+                        <div class="logo-subtext">BY: NERVA NIER</div>
                     </div>
                 </div>
             </div>
             
             <div class="footer-links">
-                <h3>QUICK LINKS</h3>
+                <h3>NAVIGATION</h3>
                 <ul>
-                    <li style="--k: 0;"><a href="#home">HOME</a></li>
-                    <li style="--k: 1;"><a href="#resources">RESOURCES</a></li>
-                    <li style="--k: 2;"><a href="#contacts">CONTACTS</a></li>
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#resources">RESOURCES</a></li>
+                    <li><a href="#contacts">CONTACTS</a></li>
                 </ul>
             </div>
         </div>
         
         <div class="copyright">
-            &copy; © 2025 THE MIDNIGHT CLUB MURLOG. ALL RIGHTS RESERVED.
+            &copy; 2024 THE MIDNIGHT CLUB - ALL RIGHTS RESERVED
+            <div class="signature">CREATED WITH ♥ BY NERVA NIER</div>
         </div>
     </footer>
 
@@ -1167,121 +966,35 @@
                 setTimeout(() => {
                     loadingScreen.style.display = 'none';
                     
-                    // Create all particle effects
-                    createRainEffect();
-                    createKanjiParticles();
-                    createSakuraPetals();
-                    createNeonSigns();
+                    // Create glow particles
+                    createGlowParticles();
                 }, 800);
-            }, 2500);
+            }, 2000);
         });
 
-        // Create rain effect
-        function createRainEffect() {
-            const rainContainer = document.getElementById('rainContainer');
-            const rainCount = 60;
-            
-            for(let i = 0; i < rainCount; i++) {
-                const raindrop = document.createElement('div');
-                raindrop.className = 'raindrop';
-                
-                const left = Math.random() * 100;
-                const delay = Math.random() * 2;
-                const duration = 1 + Math.random() * 1;
-                const height = 15 + Math.random() * 15;
-                
-                raindrop.style.left = `${left}%`;
-                raindrop.style.animationDelay = `${delay}s`;
-                raindrop.style.animationDuration = `${duration}s`;
-                raindrop.style.height = `${height}px`;
-                
-                rainContainer.appendChild(raindrop);
-            }
-        }
-
-        // Create floating Kanji characters
-        function createKanjiParticles() {
-            const kanjiChars = ['夜', '東京', '夢', '光', '雨', '風', '星', '月', '火', '水', '木', '金', '土'];
-            
-            for(let i = 0; i < 15; i++) {
-                const kanji = document.createElement('div');
-                kanji.className = 'kanji-particle';
-                
-                const left = Math.random() * 100;
-                const delay = Math.random() * 20;
-                const duration = 15 + Math.random() * 15;
-                const size = 1.5 + Math.random() * 2;
-                const char = kanjiChars[Math.floor(Math.random() * kanjiChars.length)];
-                
-                kanji.textContent = char;
-                kanji.style.left = `${left}%`;
-                kanji.style.animationDelay = `${delay}s`;
-                kanji.style.animationDuration = `${duration}s`;
-                kanji.style.fontSize = `${size}rem`;
-                kanji.style.opacity = 0.05 + Math.random() * 0.1;
-                
-                document.body.appendChild(kanji);
-            }
-        }
-
-        // Create sakura petals
-        function createSakuraPetals() {
-            const sakuraColors = ['rgba(255, 182, 193, 0.7)', 'rgba(255, 105, 180, 0.6)', 'rgba(255, 20, 147, 0.5)', 'rgba(255, 192, 203, 0.8)'];
+        // Create glow particles
+        function createGlowParticles() {
+            const colors = ['var(--neon-red)', 'var(--neon-blue)', 'var(--neon-cyan)', 'var(--neon-purple)'];
             
             for(let i = 0; i < 25; i++) {
-                const sakura = document.createElement('div');
-                sakura.className = 'sakura';
+                const particle = document.createElement('div');
+                particle.className = 'glow-particle';
                 
                 const left = Math.random() * 100;
+                const top = Math.random() * 100;
                 const delay = Math.random() * 15;
                 const duration = 10 + Math.random() * 10;
-                const size = 10 + Math.random() * 15;
-                const color = sakuraColors[Math.floor(Math.random() * sakuraColors.length)];
+                const size = 3 + Math.random() * 5;
                 
-                sakura.style.left = `${left}%`;
-                sakura.style.animationDelay = `${delay}s`;
-                sakura.style.animationDuration = `${duration}s`;
-                sakura.style.width = `${size}px`;
-                sakura.style.height = `${size}px`;
-                sakura.style.background = color;
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
                 
-                document.body.appendChild(sakura);
-            }
-        }
-
-        // Create neon signs
-        function createNeonSigns() {
-            for(let i = 0; i < 5; i++) {
-                const sign = document.createElement('div');
-                sign.className = 'neon-sign';
-                
-                const left = 10 + Math.random() * 80;
-                const top = 10 + Math.random() * 80;
-                const delay = Math.random() * 4;
-                const width = 100 + Math.random() * 100;
-                const height = 30 + Math.random() * 20;
-                
-                sign.style.left = `${left}%`;
-                sign.style.top = `${top}%`;
-                sign.style.animationDelay = `${delay}s`;
-                sign.style.width = `${width}px`;
-                sign.style.height = `${height}px`;
-                
-                // Random neon color
-                const colors = [
-                    'rgba(255, 42, 42, 0.1)',
-                    'rgba(42, 122, 255, 0.1)',
-                    'rgba(138, 42, 255, 0.1)'
-                ];
-                sign.style.background = colors[Math.floor(Math.random() * colors.length)];
-                sign.style.borderColor = colors[Math.floor(Math.random() * colors.length)].replace('0.1', '0.3');
-                
-                // Different Japanese text
-                const texts = ['営業中', 'OPEN', '歓迎', '東京', '夜'];
-                sign.setAttribute('data-text', texts[Math.floor(Math.random() * texts.length)]);
-                sign.innerHTML = `<div style="position:absolute;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:1.2rem;color:${colors[Math.floor(Math.random() * colors.length)].replace('0.1', '0.5')}">${sign.getAttribute('data-text')}</div>`;
-                
-                document.body.appendChild(sign);
+                document.body.appendChild(particle);
             }
         }
 
@@ -1343,49 +1056,48 @@
         });
 
         // Add typing effect to loading text
-        const loadingText = document.querySelector('.loading-text');
-        if(loadingText) {
-            const originalText = loadingText.textContent;
-            loadingText.textContent = '';
+        const loadingTitle = document.querySelector('.loading-title');
+        if(loadingTitle) {
+            const originalText = loadingTitle.textContent;
+            loadingTitle.textContent = '';
             let i = 0;
             
             const typeWriter = () => {
                 if (i < originalText.length) {
-                    loadingText.textContent += originalText.charAt(i);
+                    loadingTitle.textContent += originalText.charAt(i);
                     i++;
-                    setTimeout(typeWriter, 80);
+                    setTimeout(typeWriter, 100);
                 }
             };
             
             setTimeout(typeWriter, 500);
         }
 
-        // Add sparkle effect on click
+        // Add click effect
         document.addEventListener('click', function(e) {
-            const sparkle = document.createElement('div');
-            sparkle.style.position = 'fixed';
-            sparkle.style.width = '20px';
-            sparkle.style.height = '20px';
-            sparkle.style.background = 'radial-gradient(circle, var(--tokyo-blue), var(--tokyo-red))';
-            sparkle.style.borderRadius = '50%';
-            sparkle.style.pointerEvents = 'none';
-            sparkle.style.zIndex = '9998';
-            sparkle.style.left = `${e.clientX - 10}px`;
-            sparkle.style.top = `${e.clientY - 10}px`;
-            sparkle.style.animation = 'sparkleEffect 0.6s forwards';
+            const ripple = document.createElement('div');
+            ripple.style.position = 'fixed';
+            ripple.style.width = '20px';
+            ripple.style.height = '20px';
+            ripple.style.background = 'radial-gradient(circle, var(--neon-cyan), transparent)';
+            ripple.style.borderRadius = '50%';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.zIndex = '9998';
+            ripple.style.left = `${e.clientX - 10}px`;
+            ripple.style.top = `${e.clientY - 10}px`;
+            ripple.style.animation = 'rippleEffect 0.6s forwards';
             
-            document.body.appendChild(sparkle);
+            document.body.appendChild(ripple);
             
-            setTimeout(() => sparkle.remove(), 600);
+            setTimeout(() => ripple.remove(), 600);
         });
 
-        // Add sparkle animation
+        // Add ripple animation
         const style = document.createElement('style');
         style.textContent = `
-            @keyframes sparkleEffect {
-                0% { transform: scale(0); opacity: 1; }
-                50% { transform: scale(1.5); opacity: 0.7; }
-                100% { transform: scale(0); opacity: 0; }
+            @keyframes rippleEffect {
+                0% { transform: scale(0); opacity: 0.8; }
+                100% { transform: scale(3); opacity: 0; }
             }
         `;
         document.head.appendChild(style);
@@ -1393,11 +1105,10 @@
         // Ensure banner is visible
         const heroBanner = document.querySelector('.hero-banner');
         if(heroBanner) {
-            heroBanner.style.backgroundImage = `linear-gradient(rgba(10, 10, 20, 0.7), rgba(10, 10, 20, 0.8)), url('https://i.imgur.com/xRZhmrk.jpeg')`;
+            heroBanner.style.backgroundImage = `linear-gradient(rgba(10, 10, 20, 0.8), rgba(10, 10, 20, 0.9)), url('https://i.imgur.com/xRZhmrk.jpeg')`;
             heroBanner.style.backgroundSize = 'cover';
             heroBanner.style.backgroundPosition = 'center';
-            heroBanner.style.backgroundRepeat = 'no-repeat';
         }
     </script>
 </body>
-    </html>
+</html>
