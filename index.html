@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE MIDNIGHT CLUB - By: Nerva Nier</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;500;700&family=Montserrat:wght@400;600;800&family=Roboto+Mono:wght@300;400;600&family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,661 +14,528 @@
         }
 
         :root {
-            --neon-red: #ff0033;
-            --neon-blue: #0066ff;
-            --neon-purple: #9900ff;
-            --neon-cyan: #00ffff;
-            --dark-bg: #0a0a14;
-            --card-bg: rgba(20, 20, 35, 0.9);
+            --primary: #000000;
+            --secondary: #111111;
+            --accent-red: #ff3366;
+            --accent-blue: #3366ff;
+            --accent-cyan: #00e6e6;
             --text-primary: #ffffff;
-            --text-secondary: #b8b8d8;
-            --border-glow: rgba(255, 0, 51, 0.4);
-            --shadow-glow: rgba(0, 102, 255, 0.3);
-            --accent-gold: #ffd700;
+            --text-secondary: #cccccc;
+            --card-bg: rgba(30, 30, 30, 0.8);
+            --border-color: rgba(255, 51, 102, 0.3);
+            --glow: 0 0 20px rgba(255, 51, 102, 0.5);
         }
 
         body {
-            background: linear-gradient(135deg, #0a0a14 0%, #151525 50%, #0a0a14 100%);
+            background-color: var(--primary);
             color: var(--text-primary);
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
         }
 
-        /* Neon Grid Background */
-        .neon-grid {
+        /* Geometric Pattern */
+        .geometric-pattern {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(255, 0, 51, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 102, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
+                linear-gradient(45deg, var(--secondary) 25%, transparent 25%),
+                linear-gradient(-45deg, var(--secondary) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, var(--secondary) 75%),
+                linear-gradient(-45deg, transparent 75%, var(--secondary) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.05;
             z-index: -3;
-            opacity: 0.4;
         }
 
-        /* Holographic Lines */
-        .hologram-line {
+        /* Minimal Grid */
+        .minimal-grid {
             position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(255, 51, 102, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(51, 102, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
             z-index: -2;
-            opacity: 0.1;
-            animation: scanLine 3s linear infinite;
+            opacity: 0.2;
         }
 
-        @keyframes scanLine {
-            0% { top: 0%; }
-            100% { top: 100%; }
-        }
-
-        /* Floating Particles */
-        .glow-particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
+        /* Floating Dots */
+        .floating-dot {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-red);
             border-radius: 50%;
-            z-index: -2;
-            opacity: 0;
-            animation: particleFloat 15s infinite linear;
-            filter: blur(1px);
+            z-index: -1;
+            opacity: 0.3;
+            animation: dotMove 20s infinite linear;
         }
 
-        @keyframes particleFloat {
-            0% { transform: translate(0, 0) scale(0); opacity: 0; }
-            10% { opacity: 0.6; transform: scale(1); }
-            90% { opacity: 0.6; }
-            100% { transform: translate(100px, 100px) scale(0); opacity: 0; }
+        @keyframes dotMove {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, 50px) scale(1.5); }
+            66% { transform: translate(-50px, 100px) scale(0.8); }
+            100% { transform: translate(0, 0) scale(1); }
         }
 
-        /* Loading Animation */
+        /* Loading Animation - Completely New */
         #loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--dark-bg);
+            background-color: var(--primary);
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             z-index: 9999;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.6s ease;
         }
 
-        .cyber-loader {
+        .loading-container {
             position: relative;
-            width: 180px;
-            height: 180px;
-            margin-bottom: 30px;
+            width: 200px;
+            height: 200px;
         }
 
-        .loader-ring {
+        .loading-line {
             position: absolute;
-            width: 100%;
+            width: 2px;
             height: 100%;
-            border: 3px solid transparent;
-            border-top: 3px solid var(--neon-red);
-            border-radius: 50%;
-            animation: spin 2s linear infinite;
+            background: linear-gradient(to bottom, transparent, var(--accent-red), transparent);
+            left: 50%;
+            transform: translateX(-50%);
+            animation: lineScan 2s infinite ease-in-out;
         }
 
-        .loader-ring:nth-child(2) {
-            width: 70%;
-            height: 70%;
-            top: 15%;
-            left: 15%;
-            border-top-color: var(--neon-blue);
-            animation-duration: 1.5s;
-            animation-direction: reverse;
+        @keyframes lineScan {
+            0% { height: 0%; top: 50%; opacity: 0; }
+            50% { height: 100%; top: 0%; opacity: 1; }
+            100% { height: 0%; top: 50%; opacity: 0; }
         }
 
-        .loader-ring:nth-child(3) {
-            width: 40%;
-            height: 40%;
-            top: 30%;
-            left: 30%;
-            border-top-color: var(--neon-cyan);
-            animation-duration: 1s;
+        .loading-text {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 8px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .loading-text span {
+            display: inline-block;
+            animation: letterWave 1.5s infinite;
+            animation-delay: calc(var(--index) * 0.1s);
         }
 
-        .loading-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            font-weight: 900;
-            letter-spacing: 6px;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, var(--neon-red), var(--neon-blue), var(--neon-cyan));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px rgba(255, 0, 51, 0.5);
+        @keyframes letterWave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
-        .loading-subtitle {
-            font-family: 'Exo 2', sans-serif;
-            font-size: 1.2rem;
-            color: var(--neon-cyan);
-            letter-spacing: 3px;
-            text-transform: uppercase;
+        .loading-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            letter-spacing: 4px;
+            margin-top: 15px;
+            opacity: 0.8;
         }
 
-        /* Header & Navigation */
+        /* Header - New Design */
         header {
-            background: rgba(15, 15, 25, 0.95);
-            backdrop-filter: blur(15px);
-            padding: 1.2rem 2.5rem;
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
             z-index: 100;
-            box-shadow: 0 5px 25px rgba(255, 0, 51, 0.2);
-            border-bottom: 2px solid var(--neon-red);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 51, 102, 0.2);
         }
 
-        .nav-container {
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
-        .logo {
+        .brand {
             display: flex;
             align-items: center;
             gap: 15px;
             text-decoration: none;
         }
 
-        .logo-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--neon-red);
-            box-shadow: 0 0 20px var(--neon-red);
-            transition: all 0.3s;
-            animation: logoPulse 3s infinite alternate;
-        }
-
-        @keyframes logoPulse {
-            0% { box-shadow: 0 0 20px var(--neon-red); }
-            100% { box-shadow: 0 0 30px var(--neon-blue), 0 0 20px var(--neon-red); }
-        }
-
-        .logo-img:hover {
-            transform: rotate(15deg) scale(1.1);
-            animation: none;
-            box-shadow: 0 0 40px var(--neon-cyan);
-            border-color: var(--neon-cyan);
-        }
-
-        .logo-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--text-primary);
-            text-shadow: 0 0 15px var(--neon-red);
-        }
-
-        .logo-subtext {
-            font-family: 'Exo 2', sans-serif;
-            font-size: 0.8rem;
-            color: var(--neon-cyan);
-            letter-spacing: 2px;
-            margin-top: 3px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-family: 'Exo 2', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid transparent;
-        }
-
-        nav a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-red), transparent);
-            transition: left 0.5s;
-        }
-
-        nav a:hover::before {
-            left: 100%;
-        }
-
-        nav a:hover {
-            color: var(--neon-red);
-            background: rgba(255, 0, 51, 0.1);
-            border: 1px solid rgba(255, 0, 51, 0.3);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: linear-gradient(45deg, var(--neon-red), var(--neon-purple));
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 4px;
-            transition: all 0.3s;
-        }
-
-        .mobile-menu-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px var(--neon-red);
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            height: 600px;
-            overflow: hidden;
-            margin-bottom: 4rem;
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, var(--accent-red), var(--accent-blue));
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.2rem;
+            color: white;
+            transition: transform 0.3s;
         }
 
-        .hero-banner {
+        .brand-icon:hover {
+            transform: rotate(45deg);
+        }
+
+        .brand-text {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+        }
+
+        .brand-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+        }
+
+        /* Navigation - New Style */
+        .main-nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-link::after {
+            content: '';
             position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-red);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mobile-toggle:hover {
+            background: var(--accent-red);
+            color: white;
+        }
+
+        /* Hero Section - New Design */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             background: 
-                linear-gradient(rgba(10, 10, 20, 0.8), rgba(10, 10, 20, 0.9)),
+                linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)),
                 url('https://i.imgur.com/xRZhmrk.jpeg');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             z-index: -1;
-            animation: bannerShift 20s infinite alternate ease-in-out;
-        }
-
-        @keyframes bannerShift {
-            0% { transform: scale(1) translateX(0); }
-            100% { transform: scale(1.05) translateX(10px); }
         }
 
         .hero-content {
-            position: relative;
             text-align: center;
-            width: 90%;
-            max-width: 900px;
-            padding: 3rem;
-            background: rgba(25, 25, 40, 0.85);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--neon-red);
-            box-shadow: 
-                0 0 40px rgba(255, 0, 51, 0.3),
-                inset 0 0 20px rgba(0, 102, 255, 0.1);
+            max-width: 800px;
+            position: relative;
         }
 
         .hero-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.2rem;
-            margin-bottom: 1rem;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4rem;
+            letter-spacing: 10px;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--text-primary);
-            text-shadow: 
-                0 0 10px var(--neon-red),
-                0 0 20px var(--neon-red),
-                0 0 30px var(--neon-blue);
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
-        .hero-subtitle {
-            font-family: 'Kanit', sans-serif;
-            font-size: 1.4rem;
-            color: var(--neon-cyan);
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--neon-cyan);
+        .hero-title span {
+            display: block;
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+            color: var(--accent-cyan);
+            margin-top: 0.5rem;
         }
 
-        .creator-tag {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 8px 20px;
-            background: rgba(153, 0, 255, 0.2);
-            border-radius: 20px;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--neon-purple);
-            border: 1px solid var(--neon-purple);
-            animation: tagGlow 2s infinite alternate;
+        .hero-divider {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-blue));
+            margin: 2rem auto;
         }
 
-        @keyframes tagGlow {
-            0% { box-shadow: 0 0 10px rgba(153, 0, 255, 0.3); }
-            100% { box-shadow: 0 0 20px rgba(153, 0, 255, 0.6); }
+        .hero-description {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
         }
 
-        /* Main Content */
-        .container {
+        /* Resources Section - New Design */
+        .section {
+            padding: 6rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
         }
 
-        section {
-            margin-bottom: 5rem;
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
         }
 
         .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            margin-bottom: 2.5rem;
-            text-align: center;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 6px;
+            margin-bottom: 1rem;
             position: relative;
-            padding-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--neon-blue);
-            text-shadow: 0 0 15px var(--neon-blue);
+            display: inline-block;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 150px;
+            width: 80px;
             height: 3px;
-            background: linear-gradient(90deg, var(--neon-red), var(--neon-blue));
-            box-shadow: 0 0 10px var(--neon-red);
+            background: var(--accent-red);
         }
 
-        /* Resources Section */
+        .section-subtitle {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
         .resources-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
         }
 
-        .resource-card {
-            background: rgba(30, 30, 45, 0.9);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.4s;
-            box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.4),
-                inset 0 0 15px rgba(255, 0, 51, 0.05);
-            border: 1px solid rgba(255, 0, 51, 0.3);
+        .resource-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            transition: all 0.3s;
             position: relative;
-            animation: cardFloat 6s infinite alternate ease-in-out;
-            animation-delay: calc(var(--card-index, 0) * 0.2s);
+            overflow: hidden;
         }
 
-        @keyframes cardFloat {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
-
-        .resource-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 
-                0 15px 35px rgba(255, 0, 51, 0.4),
-                0 0 25px rgba(0, 102, 255, 0.3);
-            border-color: var(--neon-cyan);
-            animation: none;
+        .resource-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-red);
+            box-shadow: var(--glow);
         }
 
         .resource-icon {
-            background: rgba(0, 102, 255, 0.15);
-            height: 90px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 51, 102, 0.1);
             display: flex;
-            justify-content: center;
             align-items: center;
-            font-size: 2.5rem;
-            color: var(--neon-blue);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .resource-icon::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(0, 102, 255, 0.2), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .resource-card:hover .resource-icon::before {
-            transform: translateX(100%);
-        }
-
-        .resource-content {
-            padding: 2rem;
-        }
-
-        .resource-content h3 {
-            margin-bottom: 1rem;
-            color: var(--neon-red);
+            justify-content: center;
             font-size: 1.5rem;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(255, 0, 51, 0.5);
-        }
-
-        .resource-content p {
-            color: var(--text-secondary);
+            color: var(--accent-red);
             margin-bottom: 1.5rem;
-            line-height: 1.6;
-            font-size: 1rem;
         }
 
-        .resource-btn {
+        .resource-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .resource-description {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .resource-link {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
-            background: linear-gradient(45deg, var(--neon-red), var(--neon-purple));
-            color: white;
-            padding: 10px 24px;
-            border-radius: 6px;
+            color: var(--accent-red);
             text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
             font-weight: 600;
-            font-family: 'Exo 2', sans-serif;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 0.95rem;
-            text-transform: uppercase;
+            font-size: 0.9rem;
             letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
+            padding: 10px 20px;
+            border: 1px solid var(--accent-red);
+            transition: all 0.3s;
         }
 
-        .resource-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+        .resource-link:hover {
+            background: var(--accent-red);
+            color: white;
         }
 
-        .resource-btn:hover::before {
-            left: 100%;
-        }
-
-        .resource-btn:hover {
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 102, 255, 0.6);
-        }
-
-        /* Contacts Section */
+        /* Contacts Section - New Design */
         .contacts-section {
-            padding: 4rem 3rem;
-            background: rgba(30, 30, 45, 0.9);
-            border-radius: 15px;
-            border: 2px solid var(--neon-blue);
-            box-shadow: 
-                0 0 30px rgba(0, 102, 255, 0.3),
-                inset 0 0 20px rgba(255, 0, 51, 0.1);
+            background: var(--secondary);
             margin: 4rem 0;
+            padding: 5rem 2rem;
+            border-top: 1px solid rgba(255, 51, 102, 0.2);
+            border-bottom: 1px solid rgba(255, 51, 102, 0.2);
         }
 
         .contacts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            margin-top: 2.5rem;
+            gap: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .contact-card {
-            background: rgba(25, 25, 40, 0.9);
-            padding: 2.5rem 2rem;
-            border-radius: 10px;
             text-align: center;
-            transition: all 0.4s;
-            border: 1px solid rgba(255, 0, 51, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--neon-red), var(--neon-blue));
-        }
-
-        .contact-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--neon-cyan);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
-        }
-
-        .contact-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: var(--neon-blue);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px var(--neon-blue);
-        }
-
-        .contact-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--neon-red);
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-family: 'Exo 2', sans-serif;
-            font-weight: 600;
-            padding: 10px 22px;
-            border-radius: 6px;
-            background: rgba(255, 0, 51, 0.1);
-            border: 1px solid var(--neon-red);
+            padding: 2.5rem 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             transition: all 0.3s;
         }
 
-        .contact-link:hover {
-            background: var(--neon-red);
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 30px rgba(51, 102, 255, 0.3);
+        }
+
+        .contact-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            color: var(--accent-blue);
+        }
+
+        .contact-role {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent-blue);
             color: white;
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .contact-button:hover {
+            background: var(--accent-red);
             transform: scale(1.05);
-            box-shadow: 0 0 25px var(--neon-red);
         }
 
-        /* Footer */
+        /* Footer - New Design */
         footer {
-            background: linear-gradient(to bottom, rgba(15, 15, 25, 0.95), rgba(5, 5, 15, 1));
-            padding: 3rem 2rem 1.5rem;
-            margin-top: 5rem;
-            border-top: 2px solid var(--neon-red);
-            position: relative;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-red), var(--neon-blue), transparent);
+            background: #000000;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(255, 51, 102, 0.2);
         }
 
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 2rem;
-            margin-bottom: 2.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
 
-        .footer-logo {
-            flex: 1;
-            min-width: 250px;
+        .footer-brand {
+            margin-bottom: 1.5rem;
         }
 
-        .footer-logo .logo-text {
-            font-size: 1.6rem;
+        .footer-text {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-heading {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
         }
 
         .footer-links {
-            flex: 1;
-            min-width: 250px;
-            text-align: right;
-        }
-
-        .footer-links h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
-            color: var(--neon-cyan);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .footer-links ul {
             list-style: none;
         }
 
@@ -679,281 +546,302 @@
         .footer-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-family: 'Exo 2', sans-serif;
-            transition: all 0.3s;
-            font-size: 0.95rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            transition: color 0.3s;
         }
 
         .footer-links a:hover {
-            color: var(--neon-red);
-            padding-left: 5px;
+            color: var(--accent-red);
         }
 
         .copyright {
             text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 0, 51, 0.2);
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 51, 102, 0.1);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            font-family: 'Exo 2', sans-serif;
-            font-size: 0.85rem;
         }
 
-        .signature {
-            font-family: 'Roboto Mono', monospace;
-            color: var(--neon-purple);
+        .creator {
+            color: var(--accent-cyan);
             font-weight: 600;
-            margin-top: 5px;
-            text-shadow: 0 0 10px rgba(153, 0, 255, 0.5);
         }
 
         /* Responsive */
         @media (max-width: 1024px) {
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 3rem;
+                letter-spacing: 6px;
+            }
+            
+            .section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 1.5rem;
+            }
+            
+            .main-nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 3rem;
+                transition: left 0.3s;
+                z-index: 99;
+            }
+            
+            .main-nav.active {
+                left: 0;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+                letter-spacing: 4px;
+            }
+            
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+            
+            .resources-grid,
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+                letter-spacing: 3px;
+            }
+            
+            .loading-text {
+                font-size: 1.8rem;
+                letter-spacing: 4px;
             }
             
             .section-title {
                 font-size: 1.8rem;
             }
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            nav ul {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: rgba(15, 15, 25, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-start;
-                padding-top: 3rem;
-                transition: left 0.4s;
-                z-index: 99;
-                gap: 1.5rem;
-            }
-
-            nav ul.active {
-                left: 0;
-            }
-
-            .hero-title {
-                font-size: 2rem;
-                letter-spacing: 3px;
-            }
             
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .section-title {
-                font-size: 1.6rem;
-            }
-            
-            .resources-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contacts-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .footer-links {
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                height: 500px;
-            }
-            
-            .hero-title {
-                font-size: 1.6rem;
-            }
-            
-            .hero-content {
-                padding: 2rem;
-            }
-            
-            .loading-title {
-                font-size: 2rem;
-            }
-            
-            .logo-text {
-                font-size: 1.4rem;
-            }
-            
-            header {
-                padding: 1rem 1.5rem;
+            .resource-item,
+            .contact-card {
+                padding: 2rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Background Elements -->
-    <div class="neon-grid"></div>
-    <div class="hologram-line" style="animation-delay: 0s;"></div>
-    <div class="hologram-line" style="animation-delay: 1s; top: 30%;"></div>
-    <div class="hologram-line" style="animation-delay: 2s; top: 60%;"></div>
+    <!-- Background Patterns -->
+    <div class="geometric-pattern"></div>
+    <div class="minimal-grid"></div>
+    
+    <!-- Floating Dots -->
+    <div class="floating-dot" style="top: 20%; left: 15%; animation-delay: 0s;"></div>
+    <div class="floating-dot" style="top: 60%; right: 20%; animation-delay: -5s; background-color: var(--accent-blue);"></div>
+    <div class="floating-dot" style="bottom: 30%; left: 25%; animation-delay: -10s; background-color: var(--accent-cyan);"></div>
 
-    <!-- Loading Screen -->
+    <!-- Loading Screen - COMPLETELY NEW -->
     <div id="loading-screen">
-        <div class="cyber-loader">
-            <div class="loader-ring"></div>
-            <div class="loader-ring"></div>
-            <div class="loader-ring"></div>
+        <div class="loading-container">
+            <div class="loading-line"></div>
         </div>
-        <div class="loading-title">THE MIDNIGHT CLUB</div>
-        <div class="loading-subtitle">BY: NERVA NIER</div>
+        <div class="loading-text">
+            <span style="--index: 0">T</span>
+            <span style="--index: 1">H</span>
+            <span style="--index: 2">E</span>
+            <span style="--index: 3"></span>
+            <span style="--index: 4">M</span>
+            <span style="--index: 5">I</span>
+            <span style="--index: 6">D</span>
+            <span style="--index: 7">N</span>
+            <span style="--index: 8">I</span>
+            <span style="--index: 9">G</span>
+            <span style="--index: 10">H</span>
+            <span style="--index: 11">T</span>
+            <span style="--index: 12"></span>
+            <span style="--index: 13">C</span>
+            <span style="--index: 14">L</span>
+            <span style="--index: 15">U</span>
+            <span style="--index: 16">B</span>
+        </div>
+        <div class="loading-sub">BY: NERVA NIER</div>
     </div>
 
     <!-- Header -->
     <header>
-        <div class="nav-container">
-            <a href="#home" class="logo">
-                <img src="https://i.imgur.com/7XGH14E.jpeg" alt="Midnight Club" class="logo-img">
+        <div class="header-container">
+            <a href="#home" class="brand">
+                <div class="brand-icon">MC</div>
                 <div>
-                    <div class="logo-text">THE MIDNIGHT CLUB</div>
-                    <div class="logo-subtext">BY: NERVA NIER</div>
+                    <div class="brand-text">MIDNIGHT CLUB</div>
+                    <div class="brand-tag">NERVA NIER</div>
                 </div>
             </a>
             
-            <button class="mobile-menu-btn" id="menuBtn">
+            <button class="mobile-toggle" id="menuToggle">
                 <i class="fas fa-bars"></i>
             </button>
             
-            <nav>
-                <ul id="navMenu">
-                    <li><a href="#home">HOME</a></li>
-                    <li><a href="#resources">RESOURCES</a></li>
-                    <li><a href="#contacts">CONTACTS</a></li>
-                </ul>
+            <nav class="main-nav" id="mainNav">
+                <a href="#home" class="nav-link">HOME</a>
+                <a href="#resources" class="nav-link">RESOURCES</a>
+                <a href="#contacts" class="nav-link">CONTACTS</a>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-banner"></div>
+        <div class="hero-background"></div>
         <div class="hero-content">
-            <h1 class="hero-title">THE MIDNIGHT CLUB</h1>
-            <div class="hero-subtitle">DIGITAL DESIGN COLLECTIVE</div>
-            <div class="creator-tag">BY: NERVA NIER</div>
+            <h1 class="hero-title">
+                THE MIDNIGHT CLUB
+                <span>BY: NERVA NIER</span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-description">
+                Premium digital resources and design assets curated for creators 
+                who operate in the shadows. Quality materials for exceptional results.
+            </p>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Resources Section -->
-        <section id="resources">
-            <h2 class="section-title">PREMIUM RESOURCES</h2>
-            <div class="resources-grid">
-                <div class="resource-card" style="--card-index: 0;">
-                    <div class="resource-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>BAHAN NIER</h3>
-                        <p>Koleksi bahan desain premium dengan tema futuristik dan cyberpunk. Perfect untuk proyek digital yang membutuhkan sentuhan modern.</p>
-                        <a href="https://drive.google.com/drive/folders/11kNcJiF9dfRWJadE4CEDYcYvDHfFw9TR" class="resource-btn" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> ACCESS DRIVE
-                        </a>
-                    </div>
+    <!-- Resources Section -->
+    <section class="section" id="resources">
+        <div class="section-header">
+            <h2 class="section-title">RESOURCES</h2>
+            <div class="section-subtitle">PREMIUM DIGITAL ASSETS</div>
+        </div>
+        
+        <div class="resources-grid">
+            <div class="resource-item">
+                <div class="resource-icon">
+                    <i class="fas fa-gamepad"></i>
                 </div>
-                
-                <div class="resource-card" style="--card-index: 1;">
-                    <div class="resource-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>IPV PRINCE RYUUBANN</h3>
-                        <p>Asset eksklusif untuk desain premium dengan kualitas tinggi. Preset dan template yang dioptimalkan untuk hasil maksimal.</p>
-                        <a href="https://drive.google.com/drive/folders/1rvyq8yL0UseNg81Bm4oiA1DG249CyIN_" class="resource-btn" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> ACCESS DRIVE
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="resource-card" style="--card-index: 2;">
-                    <div class="resource-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>BAHAN PRINCE RYUUBANN</h3>
-                        <p>Koleksi lengkap bahan desain untuk semua kebutuhan kreatif. Resource premium yang terus diperbarui.</p>
-                        <a href="https://drive.google.com/drive/folders/14JOw7Il6U_IcYFg9jJD1ExigGp4qnajX" class="resource-btn" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> ACCESS DRIVE
-                        </a>
-                    </div>
-                </div>
+                <h3 class="resource-title">BAHAN NIER</h3>
+                <p class="resource-description">
+                    High-quality design resources with futuristic themes. 
+                    Perfect for digital projects requiring modern aesthetics.
+                </p>
+                <a href="https://drive.google.com/drive/folders/11kNcJiF9dfRWJadE4CEDYcYvDHfFw9TR" 
+                   class="resource-link" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> ACCESS DRIVE
+                </a>
             </div>
-        </section>
+            
+            <div class="resource-item">
+                <div class="resource-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h3 class="resource-title">IPV PRINCE RYUUBANN</h3>
+                <p class="resource-description">
+                    Exclusive design assets for premium projects. 
+                    Optimized templates and presets for maximum results.
+                </p>
+                <a href="https://drive.google.com/drive/folders/1rvyq8yL0UseNg81Bm4oiA1DG249CyIN_" 
+                   class="resource-link" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> ACCESS DRIVE
+                </a>
+            </div>
+            
+            <div class="resource-item">
+                <div class="resource-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h3 class="resource-title">BAHAN PRINCE RYUUBANN</h3>
+                <p class="resource-description">
+                    Complete collection of design materials for creative projects. 
+                    Regularly updated premium resources.
+                </p>
+                <a href="https://drive.google.com/drive/folders/14JOw7Il6U_IcYFg9jJD1ExigGp4qnajX" 
+                   class="resource-link" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> ACCESS DRIVE
+                </a>
+            </div>
+        </div>
+    </section>
 
-        <!-- Contacts Section -->
-        <section id="contacts">
-            <div class="contacts-section">
-                <h2 class="section-title">CONTACT CREATOR</h2>
-                <div class="contacts-grid">
-                    <div class="contact-card">
-                        <h3 class="contact-title">THE MIDNIGHT KING</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem;">Untuk konsultasi project premium & kolaborasi</p>
-                        <a href="https://wa.me/6285814101294" class="contact-link" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                            CONTACT NERVA
-                        </a>
-                    </div>
-                    
-                    <div class="contact-card">
-                        <h3 class="contact-title">THE CIELO PRINCE</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem;">Untuk informasi & dukungan teknis</p>
-                        <a href="https://wa.me/6285135412495" class="contact-link" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                            CONTACT PRINCE
-                        </a>
-                    </div>
-                </div>
+    <!-- Contacts Section -->
+    <section class="contacts-section" id="contacts">
+        <div class="section-header">
+            <h2 class="section-title">CONTACTS</h2>
+            <div class="section-subtitle">GET IN TOUCH</div>
+        </div>
+        
+        <div class="contacts-grid">
+            <div class="contact-card">
+                <h3 class="contact-title">THE MIDNIGHT KING</h3>
+                <div class="contact-role">Premium Projects & Collaboration</div>
+                <a href="https://wa.me/6285814101294" class="contact-button" target="_blank">
+                    <i class="fab fa-whatsapp"></i> CONTACT NERVA
+                </a>
             </div>
-        </section>
-    </div>
+            
+            <div class="contact-card">
+                <h3 class="contact-title">THE CIELO PRINCE</h3>
+                <div class="contact-role">Information & Technical Support</div>
+                <a href="https://wa.me/6285135412495" class="contact-button" target="_blank">
+                    <i class="fab fa-whatsapp"></i> CONTACT PRINCE
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">
-                <div class="logo">
-                    <img src="https://i.imgur.com/7XGH14E.jpeg" alt="Midnight Club" class="logo-img" style="width: 45px; height: 45px;">
-                    <div>
-                        <div class="logo-text">THE MIDNIGHT CLUB</div>
-                        <div class="logo-subtext">BY: NERVA NIER</div>
-                    </div>
+            <div class="footer-column">
+                <div class="footer-brand">
+                    <div class="brand-text" style="font-size: 1.3rem;">MIDNIGHT CLUB</div>
+                    <div class="brand-tag">NERVA NIER</div>
                 </div>
+                <p class="footer-text">
+                    Premium digital resources for creators who value quality 
+                    and innovation in their work.
+                </p>
             </div>
             
-            <div class="footer-links">
-                <h3>NAVIGATION</h3>
-                <ul>
-                    <li><a href="#home">HOME</a></li>
-                    <li><a href="#resources">RESOURCES</a></li>
-                    <li><a href="#contacts">CONTACTS</a></li>
+            <div class="footer-column">
+                <h3 class="footer-heading">NAVIGATION</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#contacts">Contacts</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3 class="footer-heading">RESOURCES</h3>
+                <ul class="footer-links">
+                    <li><a href="https://drive.google.com/drive/folders/11kNcJiF9dfRWJadE4CEDYcYvDHfFw9TR" target="_blank">Bahan Nier</a></li>
+                    <li><a href="https://drive.google.com/drive/folders/1rvyq8yL0UseNg81Bm4oiA1DG249CyIN_" target="_blank">Ipv Prince Ryuubann</a></li>
+                    <li><a href="https://drive.google.com/drive/folders/14JOw7Il6U_IcYFg9jJD1ExigGp4qnajX" target="_blank">Bahan Prince Ryuubann</a></li>
                 </ul>
             </div>
         </div>
         
         <div class="copyright">
-            &copy; 2024 THE MIDNIGHT CLUB - ALL RIGHTS RESERVED
-            <div class="signature">CREATED WITH ♥ BY NERVA NIER</div>
+            &copy; 2024 THE MIDNIGHT CLUB. ALL RIGHTS RESERVED.
+            <br>
+            <span class="creator">CREATED BY NERVA NIER</span>
         </div>
     </footer>
 
@@ -966,58 +854,59 @@
                 setTimeout(() => {
                     loadingScreen.style.display = 'none';
                     
-                    // Create glow particles
-                    createGlowParticles();
-                }, 800);
-            }, 2000);
+                    // Create more floating dots
+                    createFloatingDots();
+                }, 600);
+            }, 2500);
         });
 
-        // Create glow particles
-        function createGlowParticles() {
-            const colors = ['var(--neon-red)', 'var(--neon-blue)', 'var(--neon-cyan)', 'var(--neon-purple)'];
+        // Create floating dots
+        function createFloatingDots() {
+            const colors = ['var(--accent-red)', 'var(--accent-blue)', 'var(--accent-cyan)'];
             
-            for(let i = 0; i < 25; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'glow-particle';
+            for(let i = 0; i < 12; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'floating-dot';
                 
                 const left = Math.random() * 100;
                 const top = Math.random() * 100;
-                const delay = Math.random() * 15;
-                const duration = 10 + Math.random() * 10;
-                const size = 3 + Math.random() * 5;
+                const delay = -Math.random() * 20;
+                const duration = 15 + Math.random() * 15;
+                const size = 4 + Math.random() * 6;
                 
-                particle.style.left = `${left}%`;
-                particle.style.top = `${top}%`;
-                particle.style.animationDelay = `${delay}s`;
-                particle.style.animationDuration = `${duration}s`;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                dot.style.left = `${left}%`;
+                dot.style.top = `${top}%`;
+                dot.style.animationDelay = `${delay}s`;
+                dot.style.animationDuration = `${duration}s`;
+                dot.style.width = `${size}px`;
+                dot.style.height = `${size}px`;
+                dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+                dot.style.opacity = 0.1 + Math.random() * 0.2;
                 
-                document.body.appendChild(particle);
+                document.body.appendChild(dot);
             }
         }
 
         // Mobile menu toggle
-        const menuBtn = document.getElementById('menuBtn');
-        const navMenu = document.getElementById('navMenu');
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
         
-        menuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            menuBtn.innerHTML = navMenu.classList.contains('active') 
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            menuToggle.innerHTML = mainNav.classList.contains('active') 
                 ? '<i class="fas fa-times"></i>' 
                 : '<i class="fas fa-bars"></i>';
         });
 
         // Close menu when clicking a link
-        document.querySelectorAll('nav a').forEach(link => {
+        document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                mainNav.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             });
         });
 
-        // Smooth scrolling for anchor links
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1035,79 +924,71 @@
             });
         });
 
-        // Fix for button clicks
-        document.querySelectorAll('.resource-btn, .contact-link').forEach(button => {
+        // Add hover effect to resource items
+        document.querySelectorAll('.resource-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                const icon = this.querySelector('.resource-icon');
+                icon.style.transform = 'scale(1.1) rotate(5deg)';
+                icon.style.transition = 'transform 0.3s';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                const icon = this.querySelector('.resource-icon');
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Add click animation to buttons
+        document.querySelectorAll('.resource-link, .contact-button').forEach(button => {
             button.addEventListener('click', function(e) {
                 if(this.getAttribute('target') === '_blank') {
                     e.stopPropagation();
+                    
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    ripple.style.position = 'absolute';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                    ripple.style.transform = 'scale(0)';
+                    ripple.style.animation = 'buttonRipple 0.6s linear';
+                    
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size/2;
+                    const y = e.clientY - rect.top - size/2;
+                    
+                    ripple.style.width = ripple.style.height = `${size}px`;
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
                 }
             });
-        });
-
-        // Add hover effect to cards
-        document.querySelectorAll('.resource-card, .contact-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.zIndex = '10';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.zIndex = '1';
-            });
-        });
-
-        // Add typing effect to loading text
-        const loadingTitle = document.querySelector('.loading-title');
-        if(loadingTitle) {
-            const originalText = loadingTitle.textContent;
-            loadingTitle.textContent = '';
-            let i = 0;
-            
-            const typeWriter = () => {
-                if (i < originalText.length) {
-                    loadingTitle.textContent += originalText.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100);
-                }
-            };
-            
-            setTimeout(typeWriter, 500);
-        }
-
-        // Add click effect
-        document.addEventListener('click', function(e) {
-            const ripple = document.createElement('div');
-            ripple.style.position = 'fixed';
-            ripple.style.width = '20px';
-            ripple.style.height = '20px';
-            ripple.style.background = 'radial-gradient(circle, var(--neon-cyan), transparent)';
-            ripple.style.borderRadius = '50%';
-            ripple.style.pointerEvents = 'none';
-            ripple.style.zIndex = '9998';
-            ripple.style.left = `${e.clientX - 10}px`;
-            ripple.style.top = `${e.clientY - 10}px`;
-            ripple.style.animation = 'rippleEffect 0.6s forwards';
-            
-            document.body.appendChild(ripple);
-            
-            setTimeout(() => ripple.remove(), 600);
         });
 
         // Add ripple animation
         const style = document.createElement('style');
         style.textContent = `
-            @keyframes rippleEffect {
-                0% { transform: scale(0); opacity: 0.8; }
-                100% { transform: scale(3); opacity: 0; }
+            @keyframes buttonRipple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
             }
         `;
         document.head.appendChild(style);
 
-        // Ensure banner is visible
-        const heroBanner = document.querySelector('.hero-banner');
-        if(heroBanner) {
-            heroBanner.style.backgroundImage = `linear-gradient(rgba(10, 10, 20, 0.8), rgba(10, 10, 20, 0.9)), url('https://i.imgur.com/xRZhmrk.jpeg')`;
-            heroBanner.style.backgroundSize = 'cover';
-            heroBanner.style.backgroundPosition = 'center';
+        // Ensure banner loads properly
+        const heroBackground = document.querySelector('.hero-background');
+        if(heroBackground) {
+            heroBackground.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url('https://i.imgur.com/xRZhmrk.jpeg')`;
+            heroBackground.style.backgroundSize = 'cover';
+            heroBackground.style.backgroundPosition = 'center';
+            heroBackground.style.backgroundAttachment = 'fixed';
         }
     </script>
 </body>
