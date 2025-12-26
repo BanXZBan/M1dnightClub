@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE MIDNIGHT CLUB - By nerva nier</title>
+    <title>THE MIDNIGHT CLUB - Tokyo Most Wanted</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Exo+2:wght@300;500;700&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -18,6 +18,7 @@
             --tokyo-blue: #2a7aff;
             --tokyo-purple: #8a2aff;
             --tokyo-pink: #ff2a8a;
+            --tokyo-cyan: #2affff;
             --dark-bg: #0a0a14;
             --darker-bg: #05050f;
             --card-bg: rgba(20, 20, 40, 0.85);
@@ -34,9 +35,6 @@
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(255, 42, 42, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(42, 122, 255, 0.05) 0%, transparent 20%);
         }
 
         /* Tokyo Street Grid */
@@ -50,8 +48,98 @@
                 linear-gradient(rgba(255, 42, 42, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(42, 122, 255, 0.03) 1px, transparent 1px);
             background-size: 60px 60px;
-            z-index: -2;
+            z-index: -3;
             opacity: 0.3;
+        }
+
+        /* Floating Kanji Characters */
+        .kanji-particle {
+            position: fixed;
+            font-size: 2rem;
+            color: rgba(255, 42, 42, 0.1);
+            z-index: -2;
+            font-family: serif;
+            user-select: none;
+            pointer-events: none;
+            animation: kanjiFloat 20s infinite linear;
+        }
+
+        @keyframes kanjiFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Neon Signs */
+        .neon-sign {
+            position: fixed;
+            width: 150px;
+            height: 40px;
+            background: rgba(255, 42, 42, 0.1);
+            border: 2px solid rgba(255, 42, 42, 0.3);
+            z-index: -2;
+            opacity: 0.2;
+            box-shadow: 0 0 20px rgba(255, 42, 42, 0.2);
+            animation: neonPulse 4s infinite alternate;
+        }
+
+        .neon-sign::before {
+            content: '営業中';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: serif;
+            font-size: 1.2rem;
+            color: rgba(255, 42, 42, 0.5);
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { opacity: 0.2; box-shadow: 0 0 20px rgba(255, 42, 42, 0.2); }
+            50% { opacity: 0.4; box-shadow: 0 0 30px rgba(255, 42, 42, 0.4); }
+        }
+
+        /* Sakura Petals */
+        .sakura {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 182, 193, 0.7);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            z-index: -2;
+            opacity: 0.7;
+            animation: sakuraFall 15s infinite linear;
+            filter: blur(0.5px);
+        }
+
+        @keyframes sakuraFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Glowing Orbs */
+        .glowing-orb {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--tokyo-blue), transparent);
+            filter: blur(20px);
+            z-index: -2;
+            opacity: 0.1;
+            animation: orbFloat 30s infinite linear;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, 50px) scale(1.2); }
+            66% { transform: translate(-50px, 100px) scale(0.8); }
+            100% { transform: translate(0, 0) scale(1); }
         }
 
         /* Traffic Light Effect */
@@ -100,6 +188,7 @@
             height: 100%;
             z-index: -1;
             opacity: 0.05;
+            pointer-events: none;
         }
 
         .raindrop {
@@ -169,9 +258,23 @@
             animation-duration: 1s;
         }
 
+        .loader-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--tokyo-red);
+            border-radius: 50%;
+            animation: particleOrbit 3s linear infinite;
+        }
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        @keyframes particleOrbit {
+            0% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
         }
 
         .loading-text {
@@ -233,12 +336,19 @@
             box-shadow: 0 0 15px var(--tokyo-red);
             transition: all 0.3s;
             filter: brightness(1.1);
+            animation: logoGlow 3s infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% { box-shadow: 0 0 15px var(--tokyo-red); }
+            100% { box-shadow: 0 0 25px var(--tokyo-blue), 0 0 15px var(--tokyo-red); }
         }
 
         .logo-img:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 25px var(--tokyo-blue);
-            border-color: var(--tokyo-blue);
+            animation: none;
+            box-shadow: 0 0 30px var(--tokyo-cyan);
+            border-color: var(--tokyo-cyan);
         }
 
         .logo-text {
@@ -339,6 +449,12 @@
             background-position: center;
             background-repeat: no-repeat;
             z-index: -1;
+            animation: bannerPan 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes bannerPan {
+            0% { transform: scale(1) translateX(0); }
+            100% { transform: scale(1.05) translateX(20px); }
         }
 
         .hero-content {
@@ -354,6 +470,12 @@
             box-shadow: 
                 0 0 40px rgba(255, 42, 42, 0.3),
                 inset 0 0 20px rgba(42, 122, 255, 0.1);
+            animation: contentFloat 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes contentFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
         }
 
         .hero-title {
@@ -368,6 +490,12 @@
                 0 0 20px var(--tokyo-red),
                 0 0 30px var(--tokyo-blue);
             line-height: 1.2;
+            animation: titleGlow 3s infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 10px var(--tokyo-red), 0 0 20px var(--tokyo-red), 0 0 30px var(--tokyo-blue); }
+            100% { text-shadow: 0 0 15px var(--tokyo-blue), 0 0 25px var(--tokyo-red), 0 0 35px var(--tokyo-purple); }
         }
 
         .hero-subtitle {
@@ -377,6 +505,12 @@
             margin-bottom: 2rem;
             letter-spacing: 2px;
             text-shadow: 0 0 10px var(--tokyo-blue);
+            animation: subtitlePulse 2s infinite alternate;
+        }
+
+        @keyframes subtitlePulse {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
         }
 
         /* Main Content */
@@ -401,6 +535,12 @@
             letter-spacing: 3px;
             color: var(--tokyo-red);
             text-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
+            animation: sectionTitleGlow 4s infinite alternate;
+        }
+
+        @keyframes sectionTitleGlow {
+            0% { text-shadow: 0 0 10px rgba(255, 42, 42, 0.5); }
+            100% { text-shadow: 0 0 15px rgba(255, 42, 42, 0.8), 0 0 20px rgba(42, 122, 255, 0.5); }
         }
 
         .section-title::after {
@@ -413,6 +553,12 @@
             height: 3px;
             background: linear-gradient(90deg, var(--tokyo-red), var(--tokyo-blue));
             box-shadow: 0 0 10px var(--tokyo-red);
+            animation: linePulse 2s infinite alternate;
+        }
+
+        @keyframes linePulse {
+            0% { width: 150px; opacity: 0.7; }
+            100% { width: 200px; opacity: 1; }
         }
 
         /* Resources Section */
@@ -433,14 +579,22 @@
             border: 1px solid rgba(255, 42, 42, 0.3);
             position: relative;
             cursor: pointer;
+            animation: cardFloat 6s infinite alternate ease-in-out;
+            animation-delay: calc(var(--i) * 0.2s);
+        }
+
+        @keyframes cardFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
         }
 
         .resource-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             box-shadow: 
                 0 15px 35px rgba(255, 42, 42, 0.3),
                 0 0 25px rgba(42, 122, 255, 0.2);
             border-color: var(--tokyo-blue);
+            animation: none;
         }
 
         .resource-icon {
@@ -453,6 +607,15 @@
             color: var(--tokyo-blue);
             position: relative;
             overflow: hidden;
+        }
+
+        .resource-icon i {
+            animation: iconFloat 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes iconFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
         }
 
         .resource-content {
@@ -494,12 +657,29 @@
             font-size: 0.95rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .resource-btn:hover::before {
+            left: 100%;
         }
 
         .resource-btn:hover {
             background: linear-gradient(45deg, var(--tokyo-purple), var(--tokyo-blue));
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(42, 122, 255, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 20px rgba(42, 122, 255, 0.6);
         }
 
         /* Contacts Section */
@@ -512,6 +692,12 @@
                 0 0 30px rgba(42, 122, 255, 0.3),
                 inset 0 0 20px rgba(255, 42, 42, 0.1);
             margin: 4rem 0;
+            animation: contactSectionGlow 4s infinite alternate;
+        }
+
+        @keyframes contactSectionGlow {
+            0% { box-shadow: 0 0 30px rgba(42, 122, 255, 0.3), inset 0 0 20px rgba(255, 42, 42, 0.1); }
+            100% { box-shadow: 0 0 40px rgba(42, 122, 255, 0.5), inset 0 0 25px rgba(255, 42, 42, 0.2); }
         }
 
         .contacts-grid {
@@ -530,22 +716,20 @@
             border: 1px solid rgba(255, 42, 42, 0.3);
             position: relative;
             overflow: hidden;
+            animation: contactCardFloat 5s infinite alternate ease-in-out;
+            animation-delay: calc(var(--j) * 0.3s);
         }
 
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--tokyo-red), var(--tokyo-blue));
+        @keyframes contactCardFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
         }
 
         .contact-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-8px) scale(1.03);
             border-color: var(--tokyo-blue);
-            box-shadow: 0 10px 25px rgba(42, 122, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(42, 122, 255, 0.4);
+            animation: none;
         }
 
         .contact-title {
@@ -555,6 +739,12 @@
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            animation: contactTitleGlow 3s infinite alternate;
+        }
+
+        @keyframes contactTitleGlow {
+            0% { text-shadow: 0 0 5px var(--tokyo-blue); }
+            100% { text-shadow: 0 0 10px var(--tokyo-blue), 0 0 15px var(--tokyo-cyan); }
         }
 
         .contact-link {
@@ -571,13 +761,24 @@
             background: rgba(255, 42, 42, 0.1);
             border: 1px solid var(--tokyo-red);
             transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link i {
+            animation: iconPulse 2s infinite alternate;
+        }
+
+        @keyframes iconPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
         }
 
         .contact-link:hover {
             background: var(--tokyo-red);
             color: white;
             transform: scale(1.05);
-            box-shadow: 0 0 20px var(--tokyo-red);
+            box-shadow: 0 0 25px var(--tokyo-red);
         }
 
         /* Footer */
@@ -597,6 +798,12 @@
             width: 100%;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--tokyo-red), var(--tokyo-blue), transparent);
+            animation: footerGlow 3s infinite alternate;
+        }
+
+        @keyframes footerGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
 
         .footer-content {
@@ -640,6 +847,13 @@
 
         .footer-links li {
             margin-bottom: 0.8rem;
+            animation: linkFloat 5s infinite alternate ease-in-out;
+            animation-delay: calc(var(--k) * 0.2s);
+        }
+
+        @keyframes linkFloat {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-5px); }
         }
 
         .footer-links a {
@@ -653,6 +867,7 @@
         .footer-links a:hover {
             color: var(--tokyo-red);
             padding-left: 5px;
+            text-shadow: 0 0 10px var(--tokyo-red);
         }
 
         .copyright {
@@ -663,6 +878,12 @@
             font-family: 'Exo 2', sans-serif;
             font-size: 0.85rem;
             opacity: 0.7;
+            animation: copyrightGlow 4s infinite alternate;
+        }
+
+        @keyframes copyrightGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 0.8; }
         }
 
         /* Responsive */
@@ -673,6 +894,10 @@
             
             .section-title {
                 font-size: 1.8rem;
+            }
+            
+            .kanji-particle, .neon-sign, .sakura {
+                display: none;
             }
         }
 
@@ -731,6 +956,10 @@
             .footer-links {
                 text-align: center;
             }
+            
+            .traffic-light {
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
@@ -771,6 +1000,11 @@
         <div class="light blue-light"></div>
     </div>
     
+    <!-- Glowing Orbs -->
+    <div class="glowing-orb" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+    <div class="glowing-orb" style="top: 60%; right: 15%; animation-delay: -10s; background: radial-gradient(circle, var(--tokyo-red), transparent);"></div>
+    <div class="glowing-orb" style="bottom: 30%; left: 20%; animation-delay: -20s; background: radial-gradient(circle, var(--tokyo-purple), transparent);"></div>
+
     <!-- Rain Effect -->
     <div class="rain" id="rainContainer"></div>
 
@@ -780,6 +1014,9 @@
             <div class="loader-circle"></div>
             <div class="loader-circle"></div>
             <div class="loader-circle"></div>
+            <div class="loader-particle"></div>
+            <div class="loader-particle" style="animation-delay: -1.5s;"></div>
+            <div class="loader-particle" style="animation-delay: -1s;"></div>
         </div>
         <div class="loading-text">THE MIDNIGHT CLUB</div>
         <div class="loading-subtext">TOKYO MOST WANTED</div>
@@ -825,7 +1062,7 @@
         <section id="resources">
             <h2 class="section-title">MIDNIGHT RESOURCES</h2>
             <div class="resources-grid">
-                <div class="resource-card">
+                <div class="resource-card" style="--i: 0;">
                     <div class="resource-icon">
                         <i class="fas fa-gamepad"></i>
                     </div>
@@ -838,7 +1075,7 @@
                     </div>
                 </div>
                 
-                <div class="resource-card">
+                <div class="resource-card" style="--i: 1;">
                     <div class="resource-icon">
                         <i class="fas fa-crown"></i>
                     </div>
@@ -851,7 +1088,7 @@
                     </div>
                 </div>
                 
-                <div class="resource-card">
+                <div class="resource-card" style="--i: 2;">
                     <div class="resource-icon">
                         <i class="fas fa-gem"></i>
                     </div>
@@ -871,7 +1108,7 @@
             <div class="contacts-section">
                 <h2 class="section-title">MIDNIGHT CONTACTS</h2>
                 <div class="contacts-grid">
-                    <div class="contact-card">
+                    <div class="contact-card" style="--j: 0;">
                         <h3 class="contact-title">THE MIDNIGHT KING</h3>
                         <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 1rem; opacity: 0.9;">Untuk konsultasi project premium</p>
                         <a href="https://wa.me/6285814101294" class="contact-link" target="_blank">
@@ -880,7 +1117,7 @@
                         </a>
                     </div>
                     
-                    <div class="contact-card">
+                    <div class="contact-card" style="--j: 1;">
                         <h3 class="contact-title">THE CIELO PRINCE</h3>
                         <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 1rem; opacity: 0.9;">Untuk informasi & kolaborasi</p>
                         <a href="https://wa.me/6285135412495" class="contact-link" target="_blank">
@@ -909,9 +1146,9 @@
             <div class="footer-links">
                 <h3>QUICK LINKS</h3>
                 <ul>
-                    <li><a href="#home">HOME</a></li>
-                    <li><a href="#resources">RESOURCES</a></li>
-                    <li><a href="#contacts">CONTACTS</a></li>
+                    <li style="--k: 0;"><a href="#home">HOME</a></li>
+                    <li style="--k: 1;"><a href="#resources">RESOURCES</a></li>
+                    <li style="--k: 2;"><a href="#contacts">CONTACTS</a></li>
                 </ul>
             </div>
         </div>
@@ -930,16 +1167,19 @@
                 setTimeout(() => {
                     loadingScreen.style.display = 'none';
                     
-                    // Create rain effect
+                    // Create all particle effects
                     createRainEffect();
+                    createKanjiParticles();
+                    createSakuraPetals();
+                    createNeonSigns();
                 }, 800);
-            }, 2000);
+            }, 2500);
         });
 
         // Create rain effect
         function createRainEffect() {
             const rainContainer = document.getElementById('rainContainer');
-            const rainCount = 50;
+            const rainCount = 60;
             
             for(let i = 0; i < rainCount; i++) {
                 const raindrop = document.createElement('div');
@@ -948,12 +1188,100 @@
                 const left = Math.random() * 100;
                 const delay = Math.random() * 2;
                 const duration = 1 + Math.random() * 1;
+                const height = 15 + Math.random() * 15;
                 
                 raindrop.style.left = `${left}%`;
                 raindrop.style.animationDelay = `${delay}s`;
                 raindrop.style.animationDuration = `${duration}s`;
+                raindrop.style.height = `${height}px`;
                 
                 rainContainer.appendChild(raindrop);
+            }
+        }
+
+        // Create floating Kanji characters
+        function createKanjiParticles() {
+            const kanjiChars = ['夜', '東京', '夢', '光', '雨', '風', '星', '月', '火', '水', '木', '金', '土'];
+            
+            for(let i = 0; i < 15; i++) {
+                const kanji = document.createElement('div');
+                kanji.className = 'kanji-particle';
+                
+                const left = Math.random() * 100;
+                const delay = Math.random() * 20;
+                const duration = 15 + Math.random() * 15;
+                const size = 1.5 + Math.random() * 2;
+                const char = kanjiChars[Math.floor(Math.random() * kanjiChars.length)];
+                
+                kanji.textContent = char;
+                kanji.style.left = `${left}%`;
+                kanji.style.animationDelay = `${delay}s`;
+                kanji.style.animationDuration = `${duration}s`;
+                kanji.style.fontSize = `${size}rem`;
+                kanji.style.opacity = 0.05 + Math.random() * 0.1;
+                
+                document.body.appendChild(kanji);
+            }
+        }
+
+        // Create sakura petals
+        function createSakuraPetals() {
+            const sakuraColors = ['rgba(255, 182, 193, 0.7)', 'rgba(255, 105, 180, 0.6)', 'rgba(255, 20, 147, 0.5)', 'rgba(255, 192, 203, 0.8)'];
+            
+            for(let i = 0; i < 25; i++) {
+                const sakura = document.createElement('div');
+                sakura.className = 'sakura';
+                
+                const left = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = 10 + Math.random() * 10;
+                const size = 10 + Math.random() * 15;
+                const color = sakuraColors[Math.floor(Math.random() * sakuraColors.length)];
+                
+                sakura.style.left = `${left}%`;
+                sakura.style.animationDelay = `${delay}s`;
+                sakura.style.animationDuration = `${duration}s`;
+                sakura.style.width = `${size}px`;
+                sakura.style.height = `${size}px`;
+                sakura.style.background = color;
+                
+                document.body.appendChild(sakura);
+            }
+        }
+
+        // Create neon signs
+        function createNeonSigns() {
+            for(let i = 0; i < 5; i++) {
+                const sign = document.createElement('div');
+                sign.className = 'neon-sign';
+                
+                const left = 10 + Math.random() * 80;
+                const top = 10 + Math.random() * 80;
+                const delay = Math.random() * 4;
+                const width = 100 + Math.random() * 100;
+                const height = 30 + Math.random() * 20;
+                
+                sign.style.left = `${left}%`;
+                sign.style.top = `${top}%`;
+                sign.style.animationDelay = `${delay}s`;
+                sign.style.width = `${width}px`;
+                sign.style.height = `${height}px`;
+                
+                // Random neon color
+                const colors = [
+                    'rgba(255, 42, 42, 0.1)',
+                    'rgba(42, 122, 255, 0.1)',
+                    'rgba(138, 42, 255, 0.1)'
+                ];
+                sign.style.background = colors[Math.floor(Math.random() * colors.length)];
+                sign.style.borderColor = colors[Math.floor(Math.random() * colors.length)].replace('0.1', '0.3');
+                
+                // Different Japanese text
+                const texts = ['営業中', 'OPEN', '歓迎', '東京', '夜'];
+                sign.setAttribute('data-text', texts[Math.floor(Math.random() * texts.length)]);
+                sign.innerHTML = `<div style="position:absolute;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:1.2rem;color:${colors[Math.floor(Math.random() * colors.length)].replace('0.1', '0.5')}">${sign.getAttribute('data-text')}</div>`;
+                
+                document.body.appendChild(sign);
             }
         }
 
@@ -994,10 +1322,9 @@
             });
         });
 
-        // Fix for button clicks - ensure all buttons are properly clickable
+        // Fix for button clicks
         document.querySelectorAll('.resource-btn, .contact-link').forEach(button => {
             button.addEventListener('click', function(e) {
-                // Ensure the link opens in new tab
                 if(this.getAttribute('target') === '_blank') {
                     e.stopPropagation();
                 }
@@ -1007,11 +1334,11 @@
         // Add hover effect to cards
         document.querySelectorAll('.resource-card, .contact-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px)';
+                this.style.zIndex = '10';
             });
             
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
+                this.style.zIndex = '1';
             });
         });
 
@@ -1026,29 +1353,46 @@
                 if (i < originalText.length) {
                     loadingText.textContent += originalText.charAt(i);
                     i++;
-                    setTimeout(typeWriter, 100);
+                    setTimeout(typeWriter, 80);
                 }
             };
             
             setTimeout(typeWriter, 500);
         }
 
-        // Add neon pulse to section titles
-        const sectionTitles = document.querySelectorAll('.section-title');
-        sectionTitles.forEach(title => {
-            title.addEventListener('mouseenter', function() {
-                this.style.textShadow = '0 0 15px var(--tokyo-red), 0 0 30px var(--tokyo-blue)';
-            });
+        // Add sparkle effect on click
+        document.addEventListener('click', function(e) {
+            const sparkle = document.createElement('div');
+            sparkle.style.position = 'fixed';
+            sparkle.style.width = '20px';
+            sparkle.style.height = '20px';
+            sparkle.style.background = 'radial-gradient(circle, var(--tokyo-blue), var(--tokyo-red))';
+            sparkle.style.borderRadius = '50%';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '9998';
+            sparkle.style.left = `${e.clientX - 10}px`;
+            sparkle.style.top = `${e.clientY - 10}px`;
+            sparkle.style.animation = 'sparkleEffect 0.6s forwards';
             
-            title.addEventListener('mouseleave', function() {
-                this.style.textShadow = '0 0 10px rgba(255, 42, 42, 0.5)';
-            });
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 600);
         });
+
+        // Add sparkle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkleEffect {
+                0% { transform: scale(0); opacity: 1; }
+                50% { transform: scale(1.5); opacity: 0.7; }
+                100% { transform: scale(0); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
 
         // Ensure banner is visible
         const heroBanner = document.querySelector('.hero-banner');
         if(heroBanner) {
-            // Force banner to load properly
             heroBanner.style.backgroundImage = `linear-gradient(rgba(10, 10, 20, 0.7), rgba(10, 10, 20, 0.8)), url('https://i.imgur.com/xRZhmrk.jpeg')`;
             heroBanner.style.backgroundSize = 'cover';
             heroBanner.style.backgroundPosition = 'center';
@@ -1056,4 +1400,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
