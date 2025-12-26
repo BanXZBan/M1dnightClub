@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cielo Briliante - The Dios De Design</title>
+    <title>THE MIDNIGHT CLUB - Tokyo Midnight By Nerva</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Exo+2:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,77 +14,74 @@
         }
 
         :root {
-            --gold: #FFD700;
-            --gold-light: #FFF8DC;
-            --gold-dark: #B8860B;
-            --celestial: #87CEEB;
-            --celestial-dark: #4682B4;
-            --divine: #9370DB;
-            --marble: #F8F8FF;
-            --marble-dark: #E6E6FA;
-            --bronze: #CD7F32;
-            --shadow: rgba(0, 0, 0, 0.3);
-            --text: #2C2C2C;
-            --text-light: #666;
-            --divine-glow: rgba(147, 112, 219, 0.3);
-            --celestial-glow: rgba(135, 206, 235, 0.3);
+            --neon-pink: #ff00ff;
+            --neon-cyan: #00ffff;
+            --neon-purple: #9d00ff;
+            --neon-red: #ff0055;
+            --dark-bg: #0a0a0f;
+            --darker-bg: #05050a;
+            --card-bg: rgba(20, 20, 30, 0.9);
+            --text-light: #e0e0ff;
+            --text-glow: rgba(224, 224, 255, 0.8);
+            --border-glow: rgba(255, 0, 255, 0.3);
+            --cyber-yellow: #ffff00;
         }
 
         body {
-            background: linear-gradient(135deg, #0a0a23 0%, #1a1a2e 50%, #2d2d5e 100%);
-            color: var(--text);
-            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #05050a 50%, #151525 100%);
+            color: var(--text-light);
+            font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
         }
 
-        /* Divine Particles */
-        .divine-particle {
-            position: absolute;
-            background: radial-gradient(circle, var(--gold), transparent);
-            border-radius: 50%;
-            z-index: -1;
-            opacity: 0.15;
-            animation: floatDivine 20s infinite linear;
-        }
-
-        @keyframes floatDivine {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(50px, 30px) rotate(120deg); }
-            66% { transform: translate(-30px, 50px) rotate(240deg); }
-            100% { transform: translate(0, 0) rotate(360deg); }
-        }
-
-        /* Dios Pattern */
-        .dios-pattern {
+        /* Cyber Grid Background */
+        .cyber-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(circle at 20% 30%, var(--divine-glow) 2px, transparent 2px),
-                radial-gradient(circle at 80% 70%, var(--celestial-glow) 3px, transparent 3px);
-            background-size: 100px 100px, 150px 150px;
-            z-index: -1;
+                linear-gradient(rgba(255, 0, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            opacity: 0.4;
+        }
+
+        /* Neon Scan Lines */
+        .scan-line {
+            position: fixed;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
             opacity: 0.1;
-        }
-
-        /* Divine Rays */
-        .divine-ray {
-            position: absolute;
-            width: 2px;
-            height: 200px;
-            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-            opacity: 0;
             z-index: -1;
-            animation: rayFlash 8s infinite;
+            animation: scan 3s linear infinite;
         }
 
-        @keyframes rayFlash {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 0.7; }
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        /* Neon Particles */
+        .neon-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            animation: particleFloat 10s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translate(0, 0) scale(0); opacity: 0; }
+            50% { opacity: 0.8; transform: translate(100px, 50px) scale(1); }
+            100% { transform: translate(200px, 100px) scale(0); opacity: 0; }
         }
 
         /* Loading Animation */
@@ -94,87 +91,92 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0a0a23 0%, #1a1a2e 100%);
+            background: var(--dark-bg);
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             z-index: 9999;
-            transition: opacity 1s ease;
+            transition: opacity 0.8s ease;
         }
 
-        .dios-loader {
+        .cyber-loader {
             position: relative;
-            width: 250px;
-            height: 250px;
+            width: 200px;
+            height: 200px;
             margin-bottom: 40px;
         }
 
-        .divine-sun {
+        .cyber-circle {
             position: absolute;
-            width: 120px;
-            height: 120px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: radial-gradient(circle, var(--gold), var(--bronze));
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent;
             border-radius: 50%;
-            box-shadow: 0 0 60px var(--gold), 0 0 90px var(--gold-light);
-            animation: divinePulse 2s infinite alternate;
+            animation: rotate 2s linear infinite;
         }
 
-        .divine-sun::before {
-            content: '';
-            position: absolute;
-            width: 140px;
-            height: 140px;
-            top: -10px;
-            left: -10px;
-            border: 5px solid transparent;
-            border-top: 5px solid var(--gold);
-            border-radius: 50%;
-            animation: divineRotate 3s infinite linear;
+        .cyber-circle:nth-child(1) {
+            border-top: 4px solid var(--neon-pink);
+            border-right: 4px solid transparent;
+            animation-delay: 0s;
         }
 
-        @keyframes divinePulse {
-            0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 60px var(--gold); }
-            100% { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 90px var(--gold-light); }
+        .cyber-circle:nth-child(2) {
+            border-top: 4px solid var(--neon-cyan);
+            border-right: 4px solid transparent;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0.2s;
+            animation-direction: reverse;
         }
 
-        @keyframes divineRotate {
+        .cyber-circle:nth-child(3) {
+            border-top: 4px solid var(--neon-purple);
+            border-right: 4px solid transparent;
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            animation-delay: 0.4s;
+        }
+
+        @keyframes rotate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
         .loading-text {
-            font-size: 3rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
             font-weight: 900;
-            font-family: 'Cinzel', serif;
-            background: linear-gradient(45deg, var(--gold), var(--celestial), var(--divine));
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan), var(--neon-purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            letter-spacing: 4px;
             position: relative;
-            animation: textGlow 2s infinite alternate;
+            animation: textGlitch 3s infinite;
         }
 
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
-            100% { text-shadow: 0 0 30px rgba(135, 206, 235, 0.7), 0 0 40px rgba(147, 112, 219, 0.5); }
+        @keyframes textGlitch {
+            0%, 100% { text-shadow: 2px 2px 0px var(--neon-pink), -2px -2px 0px var(--neon-cyan); }
+            50% { text-shadow: -2px -2px 0px var(--neon-pink), 2px 2px 0px var(--neon-cyan); }
         }
 
         /* Header & Navigation */
         header {
-            background: rgba(10, 10, 35, 0.95);
-            backdrop-filter: blur(15px);
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
             padding: 1.5rem 3rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 5px 30px rgba(147, 112, 219, 0.3);
-            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
+            border-bottom: 2px solid var(--neon-pink);
         }
 
         .nav-container {
@@ -193,40 +195,41 @@
         }
 
         .logo-img {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--gold);
-            box-shadow: 0 0 25px var(--gold), inset 0 0 15px var(--gold-light);
-            transition: transform 0.5s;
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 20px var(--neon-pink);
+            filter: contrast(1.2) brightness(1.1);
+            transition: all 0.3s;
         }
 
         .logo-img:hover {
-            transform: rotate(15deg) scale(1.05);
+            transform: rotate(10deg);
+            box-shadow: 0 0 30px var(--neon-cyan);
+            border-color: var(--neon-cyan);
         }
 
         .logo-text {
-            font-family: 'Cinzel', serif;
-            font-size: 2.2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
             font-weight: 900;
-            background: linear-gradient(45deg, var(--gold), var(--celestial));
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 2px;
-            position: relative;
+            text-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
         }
 
-        .logo-text::after {
-            content: 'The Dios De Design';
-            position: absolute;
-            bottom: -20px;
-            left: 0;
+        .logo-subtext {
+            font-family: 'Exo 2', sans-serif;
             font-size: 0.9rem;
-            font-family: 'Playfair Display', serif;
-            color: var(--gold-light);
-            letter-spacing: 1px;
+            color: var(--neon-cyan);
+            letter-spacing: 2px;
+            margin-top: 5px;
         }
 
         nav ul {
@@ -236,14 +239,14 @@
         }
 
         nav a {
-            color: var(--marble);
+            color: var(--text-light);
             text-decoration: none;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 600;
             font-size: 1.1rem;
             padding: 10px 20px;
-            border-radius: 25px;
-            transition: all 0.4s;
+            border-radius: 5px;
+            transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
@@ -251,12 +254,12 @@
         nav a::before {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: -100%;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
-            transition: left 0.7s;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
+            transition: left 0.5s;
         }
 
         nav a:hover::before {
@@ -264,16 +267,16 @@
         }
 
         nav a:hover {
-            color: var(--gold);
-            background: rgba(147, 112, 219, 0.1);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            color: var(--neon-pink);
+            background: rgba(255, 0, 255, 0.1);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
         }
 
         .mobile-menu-btn {
             display: none;
             background: none;
-            border: 2px solid var(--gold);
-            color: var(--gold);
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
             font-size: 1.5rem;
             cursor: pointer;
             padding: 10px;
@@ -282,8 +285,9 @@
         }
 
         .mobile-menu-btn:hover {
-            background: var(--gold);
-            color: #0a0a23;
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-pink);
         }
 
         /* Hero Section */
@@ -297,72 +301,84 @@
             justify-content: center;
         }
 
-        .banner {
+        .hero-banner {
+            position: absolute;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
-            filter: brightness(0.7) contrast(1.2);
+            background: linear-gradient(rgba(10, 10, 15, 0.9), rgba(10, 10, 15, 0.7)),
+                        url('https://i.imgur.com/xRZhmrk.jpeg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.6) contrast(1.2);
+            z-index: -1;
         }
 
         .hero-content {
-            position: absolute;
+            position: relative;
             text-align: center;
             width: 90%;
             max-width: 1000px;
-            padding: 3rem;
-            border-radius: 30px;
-            background: rgba(10, 10, 35, 0.7);
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 20px 50px rgba(147, 112, 219, 0.4);
+            padding: 4rem;
+            border-radius: 20px;
+            background: rgba(20, 20, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            box-shadow: 
+                0 0 50px rgba(255, 0, 255, 0.3),
+                inset 0 0 30px rgba(0, 255, 255, 0.1);
         }
 
-        .hero h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, var(--gold), var(--celestial), var(--divine));
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan), var(--neon-purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 30px rgba(135, 206, 235, 0.5);
+            text-shadow: 
+                0 0 30px rgba(255, 0, 255, 0.5),
+                0 0 60px rgba(0, 255, 255, 0.3);
+            line-height: 1.2;
         }
 
-        .hero p {
+        .hero-subtitle {
+            font-family: 'Exo 2', sans-serif;
             font-size: 1.4rem;
-            color: var(--marble);
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .hero-bio {
-            font-size: 1.3rem;
-            color: var(--gold-light);
+            color: var(--text-light);
             margin-bottom: 3rem;
-            font-style: italic;
-            font-family: 'Playfair Display', serif;
-            text-shadow: 0 0 15px var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: inline-block;
+            border: 1px solid rgba(255, 0, 255, 0.3);
         }
 
         .cta-button {
             display: inline-flex;
             align-items: center;
             gap: 15px;
-            background: linear-gradient(45deg, var(--gold), var(--divine));
-            color: #0a0a23;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            color: white;
             padding: 18px 45px;
-            border-radius: 35px;
+            border-radius: 5px;
             text-decoration: none;
             font-weight: 700;
             font-size: 1.3rem;
-            font-family: 'Cinzel', serif;
+            font-family: 'Orbitron', sans-serif;
             transition: all 0.4s;
-            box-shadow: 0 10px 30px rgba(147, 112, 219, 0.5);
+            box-shadow: 
+                0 0 30px rgba(255, 0, 255, 0.5),
+                0 0 60px rgba(157, 0, 255, 0.3);
             position: relative;
             overflow: hidden;
             z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .cta-button::before {
@@ -372,7 +388,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, var(--divine), var(--celestial));
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan));
             transition: left 0.6s;
             z-index: -1;
         }
@@ -382,8 +398,10 @@
         }
 
         .cta-button:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(135, 206, 235, 0.7);
+            transform: translateY(-5px);
+            box-shadow: 
+                0 0 40px rgba(255, 0, 255, 0.7),
+                0 0 80px rgba(0, 255, 255, 0.4);
         }
 
         /* Main Content */
@@ -398,14 +416,16 @@
         }
 
         .section-title {
-            font-family: 'Cinzel', serif;
-            font-size: 3rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
             margin-bottom: 3.5rem;
             text-align: center;
             position: relative;
-            padding-bottom: 20px;
-            color: var(--gold);
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            padding-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-cyan);
         }
 
         .section-title::after {
@@ -414,11 +434,10 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 150px;
-            height: 4px;
-            background: linear-gradient(to right, var(--gold), var(--celestial), var(--divine));
-            border-radius: 2px;
-            box-shadow: 0 0 15px var(--divine);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-pink), var(--neon-cyan), transparent);
+            box-shadow: 0 0 10px var(--neon-pink);
         }
 
         /* Resources Section */
@@ -429,12 +448,14 @@
         }
 
         .resource-card {
-            background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(10, 10, 35, 0.95));
-            border-radius: 25px;
+            background: linear-gradient(145deg, rgba(20, 20, 30, 0.9), rgba(15, 15, 25, 0.95));
+            border-radius: 10px;
             overflow: hidden;
-            transition: all 0.5s;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.4s;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                inset 0 0 20px rgba(255, 0, 255, 0.05);
+            border: 1px solid rgba(255, 0, 255, 0.2);
             position: relative;
         }
 
@@ -444,25 +465,26 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, var(--gold), var(--divine), var(--celestial));
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
         }
 
         .resource-card:hover {
-            transform: translateY(-20px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(147, 112, 219, 0.5);
-            border-color: rgba(255, 215, 0, 0.5);
+            transform: translateY(-15px);
+            box-shadow: 
+                0 20px 40px rgba(255, 0, 255, 0.4),
+                0 0 30px rgba(0, 255, 255, 0.2);
+            border-color: var(--neon-cyan);
         }
 
         .resource-icon {
-            background: rgba(147, 112, 219, 0.1);
+            background: rgba(0, 255, 255, 0.1);
             height: 100px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 3.5rem;
-            color: var(--gold);
-            text-shadow: 0 0 25px var(--gold);
+            font-size: 3rem;
+            color: var(--neon-cyan);
             position: relative;
             overflow: hidden;
         }
@@ -472,7 +494,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.2), transparent);
             transform: translateX(-100%);
             transition: transform 0.6s;
         }
@@ -487,14 +509,16 @@
 
         .resource-content h3 {
             margin-bottom: 1.5rem;
-            color: var(--celestial);
+            color: var(--neon-pink);
             font-size: 1.8rem;
-            font-family: 'Cinzel', serif;
-            text-shadow: 0 0 15px rgba(135, 206, 235, 0.5);
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
         }
 
         .resource-content p {
-            color: var(--marble);
+            color: var(--text-light);
             margin-bottom: 2rem;
             line-height: 1.7;
             font-size: 1.1rem;
@@ -505,185 +529,111 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            background: linear-gradient(45deg, var(--gold), var(--bronze));
-            color: #0a0a23;
+            background: rgba(255, 0, 255, 0.2);
+            color: var(--text-light);
             padding: 12px 28px;
-            border-radius: 30px;
+            border-radius: 5px;
             text-decoration: none;
             font-weight: 600;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Exo 2', sans-serif;
             transition: all 0.4s;
-            box-shadow: 0 8px 20px rgba(205, 127, 50, 0.4);
+            border: 1px solid var(--neon-pink);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .resource-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(255, 215, 0, 0.5);
-            background: linear-gradient(45deg, var(--bronze), var(--gold));
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-pink);
+            transform: translateY(-3px);
         }
 
-        /* Stats Section */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            text-align: center;
-        }
-
-        .stat-item {
-            background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(10, 10, 35, 0.95));
-            padding: 3rem 2.5rem;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(135, 206, 235, 0.2);
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 8px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--gold), var(--divine), var(--celestial));
-        }
-
-        .stat-item:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(135, 206, 235, 0.3);
-        }
-
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 900;
-            font-family: 'Cinzel', serif;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            text-shadow: 0 0 25px var(--gold);
-        }
-
-        .stat-label {
-            color: var(--celestial);
-            font-size: 1.3rem;
-            font-weight: 600;
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* Social Media */
-        .social-section {
-            text-align: center;
+        /* Contacts Section */
+        .contacts-section {
             padding: 5rem 4rem;
-            background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(10, 10, 35, 0.95));
-            border-radius: 35px;
-            margin: 6rem auto;
-            max-width: 1100px;
-            border: 3px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 20px 50px rgba(147, 112, 219, 0.4);
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.9), rgba(15, 15, 25, 0.95));
+            border-radius: 15px;
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            box-shadow: 
+                0 0 40px rgba(255, 0, 255, 0.3),
+                inset 0 0 30px rgba(0, 255, 255, 0.1);
+            margin: 4rem 0;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(10, 10, 20, 0.8);
+            padding: 3rem 2.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid rgba(0, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
         }
 
-        .social-section::before {
+        .contact-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 8px;
-            background: linear-gradient(90deg, var(--gold), var(--divine), var(--celestial));
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--neon-pink), var(--neon-cyan));
         }
 
-        .social-title {
-            font-size: 2.8rem;
-            margin-bottom: 4rem;
-            color: var(--celestial);
-            font-family: 'Cinzel', serif;
-            text-shadow: 0 0 25px rgba(135, 206, 235, 0.7);
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
         }
 
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            flex-wrap: wrap;
+        .contact-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px var(--neon-cyan);
         }
 
-        .social-icon {
-            display: flex;
-            flex-direction: column;
+        .contact-link {
+            display: inline-flex;
             align-items: center;
+            gap: 15px;
+            color: var(--neon-pink);
             text-decoration: none;
-            color: var(--marble);
-            transition: all 0.5s;
-            width: 140px;
-        }
-
-        .social-icon:hover {
-            transform: translateY(-15px) scale(1.1);
-        }
-
-        .social-icon i {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            width: 100px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.4s;
-            border: 3px solid transparent;
-        }
-
-        .whatsapp i {
-            background: linear-gradient(45deg, #25D366, #128C7E);
-            box-shadow: 0 0 30px #25D366;
-        }
-
-        .whatsapp:hover i {
-            transform: rotate(15deg) scale(1.1);
-            box-shadow: 0 0 40px #25D366;
-            border-color: #25D366;
-        }
-
-        .youtube i {
-            background: linear-gradient(45deg, #FF0000, #CC0000);
-            box-shadow: 0 0 30px #FF0000;
-        }
-
-        .youtube:hover i {
-            transform: rotate(-15deg) scale(1.1);
-            box-shadow: 0 0 40px #FF0000;
-            border-color: #FF0000;
-        }
-
-        .tiktok i {
-            background: linear-gradient(45deg, #000000, #333333);
-            box-shadow: 0 0 30px #000000;
-        }
-
-        .tiktok:hover i {
-            transform: rotate(10deg) scale(1.1);
-            box-shadow: 0 0 40px #000000;
-            border-color: #FFFFFF;
-        }
-
-        .social-icon span {
-            font-size: 1.1rem;
-            color: var(--gold-light);
+            font-size: 1.3rem;
+            font-family: 'Exo 2', sans-serif;
             font-weight: 600;
-            font-family: 'Playfair Display', serif;
+            padding: 12px 25px;
+            border-radius: 5px;
+            background: rgba(255, 0, 255, 0.1);
+            border: 1px solid var(--neon-pink);
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+            box-shadow: 0 0 25px var(--neon-pink);
+            transform: scale(1.05);
         }
 
         /* Footer */
         footer {
-            background: linear-gradient(to bottom, rgba(10, 10, 35, 0.95), rgba(5, 5, 20, 1));
-            padding: 5rem 3rem 3rem;
-            margin-top: 8rem;
-            border-top: 3px solid rgba(255, 215, 0, 0.3);
+            background: linear-gradient(to bottom, rgba(10, 10, 15, 0.95), rgba(5, 5, 10, 1));
+            padding: 4rem 3rem 2rem;
+            margin-top: 6rem;
+            border-top: 2px solid var(--neon-pink);
             position: relative;
         }
 
@@ -693,8 +643,9 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--gold), var(--divine), var(--celestial));
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-pink), var(--neon-cyan), transparent);
+            box-shadow: 0 0 20px var(--neon-pink);
         }
 
         .footer-content {
@@ -703,8 +654,9 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            gap: 4rem;
-            margin-bottom: 4rem;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
 
         .footer-logo {
@@ -713,35 +665,22 @@
         }
 
         .footer-logo .logo-text {
-            font-size: 2.8rem;
-        }
-
-        .footer-logo .logo-text::after {
-            bottom: -25px;
-            font-size: 1.1rem;
-        }
-
-        .footer-bio {
-            margin-top: 2rem;
-            color: var(--celestial);
-            font-size: 1.2rem;
-            line-height: 1.8;
-            font-family: 'Playfair Display', serif;
-            text-shadow: 0 0 15px rgba(135, 206, 235, 0.5);
-            max-width: 400px;
+            font-size: 2.2rem;
         }
 
         .footer-links {
             flex: 1;
-            min-width: 280px;
+            min-width: 300px;
+            text-align: right;
         }
 
         .footer-links h3 {
-            margin-bottom: 2rem;
-            color: var(--gold);
-            font-size: 1.8rem;
-            font-family: 'Cinzel', serif;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .footer-links ul {
@@ -749,89 +688,61 @@
         }
 
         .footer-links li {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
 
         .footer-links a {
-            color: var(--marble);
+            color: var(--text-light);
             text-decoration: none;
-            transition: all 0.4s;
+            font-family: 'Exo 2', sans-serif;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 15px;
-            font-size: 1.1rem;
-            font-family: 'Playfair Display', serif;
+            justify-content: flex-end;
+            gap: 10px;
         }
 
         .footer-links a:hover {
-            color: var(--gold);
-            transform: translateX(10px);
-        }
-
-        .footer-links a i {
-            color: var(--celestial);
-            width: 25px;
-            font-size: 1.2rem;
+            color: var(--neon-pink);
+            transform: translateX(-5px);
         }
 
         .copyright {
             text-align: center;
-            padding-top: 3rem;
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
-            color: var(--marble);
-            font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        /* Divine Elements */
-        .divine-element {
-            position: absolute;
-            font-size: 2rem;
-            color: var(--gold);
-            opacity: 0.1;
-            z-index: -1;
-            animation: divineFloat 15s infinite linear;
-        }
-
-        @keyframes divineFloat {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(100px, 100px) rotate(360deg); }
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 0, 255, 0.2);
+            color: var(--text-light);
+            font-family: 'Exo 2', sans-serif;
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
 
         /* Responsive */
         @media (max-width: 1200px) {
-            .hero h1 {
-                font-size: 3.2rem;
+            .hero-title {
+                font-size: 3.5rem;
             }
             
             .section-title {
-                font-size: 2.5rem;
-            }
-            
-            .social-icons {
-                gap: 3rem;
+                font-size: 2.2rem;
             }
         }
 
         @media (max-width: 992px) {
-            nav ul {
-                gap: 1.5rem;
-            }
-            
-            .hero h1 {
+            .hero-title {
                 font-size: 2.8rem;
             }
             
             .logo-text {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             
             .resources-grid {
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             }
             
-            .social-icon {
-                width: 120px;
+            .contacts-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -846,7 +757,7 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 90px);
-                background: rgba(10, 10, 35, 0.98);
+                background: rgba(10, 10, 15, 0.98);
                 backdrop-filter: blur(20px);
                 flex-direction: column;
                 align-items: center;
@@ -861,32 +772,30 @@
                 left: 0;
             }
 
-            .hero h1 {
+            .hero-title {
                 font-size: 2.2rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
+                letter-spacing: 4px;
             }
             
-            .hero-bio {
+            .hero-subtitle {
                 font-size: 1.1rem;
             }
             
             .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .stat-number {
-                font-size: 3rem;
-            }
-            
-            .social-title {
-                font-size: 2.2rem;
+                font-size: 1.8rem;
             }
             
             .footer-content {
                 flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                text-align: center;
+            }
+            
+            .footer-links a {
+                justify-content: center;
             }
         }
 
@@ -895,71 +804,65 @@
                 height: 600px;
             }
             
-            .hero h1 {
+            .hero-title {
                 font-size: 1.8rem;
             }
             
             .section-title {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
             
             .resources-grid {
                 grid-template-columns: 1fr;
             }
             
-            .social-icons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .social-icon {
-                width: 150px;
+            .hero-content {
+                padding: 2rem;
             }
             
             .logo-text {
-                font-size: 1.5rem;
-            }
-            
-            .logo-text::after {
-                font-size: 0.8rem;
-                bottom: -15px;
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Divine Background -->
-    <div class="dios-pattern"></div>
+    <!-- Cyber Grid Background -->
+    <div class="cyber-grid"></div>
     
-    <!-- Divine Particles -->
-    <div class="divine-particle" style="top: 10%; left: 5%; width: 50px; height: 50px;"></div>
-    <div class="divine-particle" style="top: 30%; right: 15%; width: 70px; height: 70px; animation-delay: -5s;"></div>
-    <div class="divine-particle" style="bottom: 20%; left: 20%; width: 40px; height: 40px; animation-delay: -10s;"></div>
+    <!-- Scan Lines -->
+    <div class="scan-line"></div>
+    <div class="scan-line" style="animation-delay: 1.5s;"></div>
     
-    <!-- Divine Rays -->
-    <div class="divine-ray" style="left: 20%; top: 10%; animation-delay: 1s;"></div>
-    <div class="divine-ray" style="right: 30%; top: 40%; animation-delay: 3s;"></div>
-    <div class="divine-ray" style="left: 40%; bottom: 30%; animation-delay: 5s;"></div>
-    
-    <!-- Divine Elements -->
-    <div class="divine-element" style="top: 15%; left: 10%;">✦</div>
-    <div class="divine-element" style="top: 60%; right: 20%; animation-delay: -7s;">✧</div>
-    <div class="divine-element" style="bottom: 15%; left: 30%; animation-delay: -3s;">❖</div>
+    <!-- Neon Particles -->
+    <div class="neon-particle" style="top: 10%; left: 5%; background: var(--neon-pink); animation-delay: 0s;"></div>
+    <div class="neon-particle" style="top: 30%; right: 15%; background: var(--neon-cyan); animation-delay: 2s;"></div>
+    <div class="neon-particle" style="bottom: 20%; left: 20%; background: var(--neon-purple); animation-delay: 4s;"></div>
+    <div class="neon-particle" style="top: 60%; right: 25%; background: var(--neon-red); animation-delay: 6s;"></div>
+    <div class="neon-particle" style="bottom: 40%; left: 35%; background: var(--neon-cyan); animation-delay: 8s;"></div>
 
     <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="dios-loader">
-            <div class="divine-sun"></div>
+        <div class="cyber-loader">
+            <div class="cyber-circle"></div>
+            <div class="cyber-circle"></div>
+            <div class="cyber-circle"></div>
         </div>
-        <div class="loading-text">CIELO BRILLANTE</div>
+        <div class="loading-text">MIDNIGHT CLUB</div>
+        <div style="margin-top: 20px; font-family: 'Exo 2', sans-serif; color: var(--neon-cyan); letter-spacing: 3px;">
+            TOKYO MIDNIGHT BY NERVA
+        </div>
     </div>
 
     <!-- Header -->
     <header>
         <div class="nav-container">
             <a href="#home" class="logo">
-                <img src="https://i.imgur.com/AdeUYWY.jpeg" alt="Cielo Briliante" class="logo-img">
-                <div class="logo-text">CIELO BRILLANTE</div>
+                <img src="https://i.imgur.com/7XGH14E.jpeg" alt="Midnight Club" class="logo-img">
+                <div>
+                    <div class="logo-text">THE MIDNIGHT CLUB</div>
+                    <div class="logo-subtext">TOKYO MIDNIGHT BY NERVA</div>
+                </div>
             </a>
             
             <button class="mobile-menu-btn" id="menuBtn">
@@ -968,10 +871,9 @@
             
             <nav>
                 <ul id="navMenu">
-                    <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#resources"><i class="fas fa-gem"></i> Divine Resources</a></li>
-                    <li><a href="#stats"><i class="fas fa-chart-bar"></i> Divine Stats</a></li>
-                    <li><a href="#social"><i class="fas fa-users"></i> Divine Community</a></li>
+                    <li><a href="#home"><i class="fas fa-home"></i> HOME</a></li>
+                    <li><a href="#resources"><i class="fas fa-folder"></i> RESOURCES</a></li>
+                    <li><a href="#contacts"><i class="fas fa-phone-alt"></i> CONTACTS</a></li>
                 </ul>
             </nav>
         </div>
@@ -979,13 +881,12 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <img src="https://i.imgur.com/g7c1dYj.jpeg" alt="Divine Banner" class="banner">
+        <div class="hero-banner"></div>
         <div class="hero-content">
-            <h1>CIELO BRILLANTE - The Dios De Design</h1>
-            <p>Menyatukan keilahian dan kreativitas dalam setiap desain. Koleksi sumber daya desain terinspirasi dewa dengan sentuhan keabadian dan kecemerlangan surgawi.</p>
-            <div class="hero-bio">hello and welcome to cielo brillante divine family</div>
+            <h1 class="hero-title">THE MIDNIGHT CLUB</h1>
+            <div class="hero-subtitle">TOKYO MIDNIGHT BY NERVA</div>
             <a href="https://banxzban.github.io/ryuu.logos/" class="cta-button" target="_blank">
-                <i class="fas fa-crown"></i> Pesan Divine Design Ryuubann
+                <i class="fas fa-crown"></i> PESAN DESIGN RYUUBANN
             </a>
         </div>
     </section>
@@ -994,89 +895,71 @@
     <div class="container">
         <!-- Resources Section -->
         <section id="resources">
-            <h2 class="section-title">Divine Resources</h2>
+            <h2 class="section-title">MIDNIGHT RESOURCES</h2>
             <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>BAHAN NIER</h3>
+                        <p>Koleksi bahan desin eksklusif dengan tema cyberpunk dan futuristik. Perfect untuk proyek dengan nuansa Tokyo Midnight.</p>
+                        <a href="https://drive.google.com/drive/folders/11kNcJiF9dfRWJadE4CEDYcYvDHfFw9TR" class="resource-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> ACCESS DRIVE
+                        </a>
+                    </div>
+                </div>
+                
                 <div class="resource-card">
                     <div class="resource-icon">
                         <i class="fas fa-crown"></i>
                     </div>
                     <div class="resource-content">
-                        <h3>昭夫 - Divine Pack Ryuubann 2K+</h3>
-                        <p>Kumpulan asset desain ilahi dengan lebih dari 2000+ elemen surgawi untuk proyek kreatif terbaikmu. Efek keemasan, template surgawi, dan resources eksklusif dewa.</p>
-                        <a href="https://drive.google.com/drive/folders/14JOw7Il6U_IcYFg9jJD1ExigGp4qnajX" class="resource-btn" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> Akses Divine Drive
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>昭夫 - Divine Preset Pixellab ft. Olympus</h3>
-                        <p>Koleksi preset surgawi untuk Pixellab dengan tema Olympus, cocok untuk pembuatan logo ilahi dan desain teks dengan efek keabadian.</p>
-                        <a href="https://drive.google.com/drive/folders/1gFmPhkj9P17N62_zREg0fULHrN1UfGOH" class="resource-btn" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> Akses Divine Drive
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>昭夫 - Divine Preset IbispaintX</h3>
-                        <p>Preset ilahi untuk IbispaintX dengan brush dan setting optimal untuk menggambar ilustrasi surgawi dengan efek cahaya dewa yang menakjubkan.</p>
+                        <h3>IPV PRINCE RYUUBANN</h3>
+                        <p>Asset premium untuk desain dengan sentuhan kerajaan cyber. Preset dan template eksklusif untuk proyek high-end.</p>
                         <a href="https://drive.google.com/drive/folders/1rvyq8yL0UseNg81Bm4oiA1DG249CyIN_" class="resource-btn" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> Akses Divine Drive
+                            <i class="fas fa-external-link-alt"></i> ACCESS DRIVE
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>BAHAN PRINCE RYUUBANN</h3>
+                        <p>Koleksi bahan desain premium untuk kebutuhan kreatif terbaik. Resource lengkap untuk proyek professional.</p>
+                        <a href="https://drive.google.com/drive/folders/14JOw7Il6U_IcYFg9jJD1ExigGp4qnajX" class="resource-btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> ACCESS DRIVE
                         </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Stats Section -->
-        <section id="stats">
-            <h2 class="section-title">Divine Statistics</h2>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">2.350</div>
-                    <div class="stat-label">Divine Effects</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">15</div>
-                    <div class="stat-label">Divine Packs</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">7</div>
-                    <div class="stat-label">Divine Team</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">42</div>
-                    <div class="stat-label">Divine Assets</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Social Media Section -->
-        <section id="social">
-            <div class="social-section">
-                <h2 class="social-title">Divine Community</h2>
-                <div class="social-icons">
-                    <a href="https://wa.me/85135412495" class="social-icon whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>Divine WhatsApp</span>
-                    </a>
-                    <a href="https://www.youtube.com/@urbaniolossio" class="social-icon youtube" target="_blank">
-                        <i class="fab fa-youtube"></i>
-                        <span>Divine YouTube</span>
-                    </a>
-                    <a href="https://www.tiktok.com/@wbannxx" class="social-icon tiktok" target="_blank">
-                        <i class="fab fa-tiktok"></i>
-                        <span>Divine TikTok</span>
-                    </a>
+        <!-- Contacts Section -->
+        <section id="contacts">
+            <div class="contacts-section">
+                <h2 class="section-title">MIDNIGHT CONTACTS</h2>
+                <div class="contacts-grid">
+                    <div class="contact-card">
+                        <h3 class="contact-title">THE MIDNIGHT KING</h3>
+                        <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 1.1rem;">Untuk konsultasi dan project premium</p>
+                        <a href="https://wa.me/6285814101294" class="contact-link" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            CONTACT NERVA
+                        </a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h3 class="contact-title">THE CIELO PRINCE</h3>
+                        <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 1.1rem;">Untuk informasi dan kolaborasi</p>
+                        <a href="https://wa.me/6285135412495" class="contact-link" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            CONTACT PRINCE
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1087,27 +970,27 @@
         <div class="footer-content">
             <div class="footer-logo">
                 <div class="logo">
-                    <img src="https://i.imgur.com/AdeUYWY.jpeg" alt="Cielo Briliante" class="logo-img" style="width: 80px; height: 80px;">
-                    <div class="logo-text">CIELO BRILLANTE</div>
+                    <img src="https://i.imgur.com/7XGH14E.jpeg" alt="Midnight Club" class="logo-img" style="width: 70px; height: 70px;">
+                    <div>
+                        <div class="logo-text">THE MIDNIGHT CLUB</div>
+                        <div class="logo-subtext">TOKYO MIDNIGHT BY NERVA</div>
+                    </div>
                 </div>
-                <p class="footer-bio">hello and welcome to cielo brillante divine family</p>
-                <p style="margin-top: 1.5rem; color: var(--marble); font-size: 1rem;">Sumber daya desain ilahi dengan sentuhan keabadian dan kecemerlangan surgawi untuk semua kebutuhan kreatif Anda.</p>
             </div>
             
             <div class="footer-links">
-                <h3>Divine Links</h3>
+                <h3>MIDNIGHT LINKS</h3>
                 <ul>
-                    <li><a href="#home"><i class="fas fa-chevron-right"></i> Divine Home</a></li>
-                    <li><a href="#resources"><i class="fas fa-chevron-right"></i> Divine Resources</a></li>
-                    <li><a href="#stats"><i class="fas fa-chevron-right"></i> Divine Stats</a></li>
-                    <li><a href="#social"><i class="fas fa-chevron-right"></i> Divine Community</a></li>
-                    <li><a href="https://banxzban.github.io/ryuu.logos/" target="_blank"><i class="fas fa-external-link-alt"></i> Pesan Divine Design</a></li>
+                    <li><a href="#home"><i class="fas fa-chevron-right"></i> HOME</a></li>
+                    <li><a href="#resources"><i class="fas fa-chevron-right"></i> RESOURCES</a></li>
+                    <li><a href="#contacts"><i class="fas fa-chevron-right"></i> CONTACTS</a></li>
+                    <li><a href="https://banxzban.github.io/ryuu.logos/" target="_blank"><i class="fas fa-external-link-alt"></i> DESIGN RYUUBANN</a></li>
                 </ul>
             </div>
         </div>
         
         <div class="copyright">
-            &copy; 2023 Cielo Briliante - The Dios De Design. All divine rights reserved.
+            &copy; 2024 THE MIDNIGHT CLUB - TOKYO MIDNIGHT BY NERVA. ALL RIGHTS RESERVED.
         </div>
     </footer>
 
@@ -1120,83 +1003,36 @@
                 setTimeout(() => {
                     loadingScreen.style.display = 'none';
                     
-                    // Create more divine particles
-                    for(let i = 0; i < 10; i++) {
-                        createDivineParticle();
-                    }
-                    
-                    // Create divine rays
-                    for(let i = 0; i < 5; i++) {
-                        createDivineRay();
-                    }
-                    
-                    // Create divine elements
-                    for(let i = 0; i < 8; i++) {
-                        createDivineElement();
-                    }
-                }, 1000);
-            }, 2500);
+                    // Create more particles
+                    createNeonParticles();
+                }, 800);
+            }, 2000);
         });
 
-        // Create divine particles
-        function createDivineParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'divine-particle';
+        // Create neon particles
+        function createNeonParticles() {
+            const colors = ['var(--neon-pink)', 'var(--neon-cyan)', 'var(--neon-purple)', 'var(--neon-red)'];
             
-            const size = 20 + Math.random() * 50;
-            const top = Math.random() * 100;
-            const left = Math.random() * 100;
-            const delay = -Math.random() * 20;
-            
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            particle.style.top = `${top}%`;
-            particle.style.left = `${left}%`;
-            particle.style.animationDelay = `${delay}s`;
-            
-            // Random color
-            const colors = ['#FFD700', '#9370DB', '#87CEEB', '#FFF8DC'];
-            particle.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random() * colors.length)]}, transparent)`;
-            
-            document.body.appendChild(particle);
-        }
-
-        // Create divine rays
-        function createDivineRay() {
-            const ray = document.createElement('div');
-            ray.className = 'divine-ray';
-            
-            const left = Math.random() * 100;
-            const top = Math.random() * 100;
-            const height = 150 + Math.random() * 150;
-            const delay = Math.random() * 8;
-            
-            ray.style.left = `${left}%`;
-            ray.style.top = `${top}%`;
-            ray.style.height = `${height}px`;
-            ray.style.animationDelay = `${delay}s`;
-            
-            document.body.appendChild(ray);
-        }
-
-        // Create divine elements
-        function createDivineElement() {
-            const element = document.createElement('div');
-            element.className = 'divine-element';
-            
-            const symbols = ['✦', '✧', '❖', '✶', '✹', '✴', '✷'];
-            const top = Math.random() * 100;
-            const left = Math.random() * 100;
-            const delay = -Math.random() * 15;
-            const size = 1.5 + Math.random() * 2;
-            
-            element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-            element.style.top = `${top}%`;
-            element.style.left = `${left}%`;
-            element.style.fontSize = `${size}rem`;
-            element.style.animationDelay = `${delay}s`;
-            
-            document.body.appendChild(element);
+            for(let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'neon-particle';
+                
+                const size = 2 + Math.random() * 6;
+                const top = Math.random() * 100;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 10;
+                const duration = 5 + Math.random() * 10;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.top = `${top}%`;
+                particle.style.left = `${left}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                document.body.appendChild(particle);
+            }
         }
 
         // Mobile menu toggle
@@ -1236,102 +1072,96 @@
             });
         });
 
-        // Animate stat numbers on hover
-        document.querySelectorAll('.stat-item').forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                const numberElement = this.querySelector('.stat-number');
-                const originalText = numberElement.textContent;
-                const originalNumber = parseInt(originalText.replace(/[^0-9]/g, ''));
+        // Add glitch effect to title on hover
+        const heroTitle = document.querySelector('.hero-title');
+        if(heroTitle) {
+            heroTitle.addEventListener('mouseenter', function() {
+                const originalText = this.textContent;
+                const glitchText = originalText.split('').map(char => {
+                    return Math.random() > 0.9 ? String.fromCharCode(65 + Math.floor(Math.random() * 26)) : char;
+                }).join('');
                 
-                if(isNaN(originalNumber)) return;
+                this.textContent = glitchText;
                 
-                let current = 0;
-                const increment = Math.ceil(originalNumber / 25);
-                const interval = setInterval(() => {
-                    current += increment;
-                    if(current >= originalNumber) {
-                        current = originalNumber;
-                        clearInterval(interval);
-                    }
-                    numberElement.textContent = current.toLocaleString();
-                }, 30);
+                setTimeout(() => {
+                    this.textContent = originalText;
+                }, 100);
             });
-        });
+        }
 
-        // Add glow effect to resource icons
+        // Add neon pulse effect to resource cards
         document.querySelectorAll('.resource-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
                 const icon = this.querySelector('.resource-icon i');
-                icon.style.textShadow = '0 0 40px var(--gold), 0 0 60px var(--celestial)';
-                icon.style.transform = 'scale(1.3) rotate(15deg)';
-                icon.style.color = 'var(--celestial)';
+                icon.style.textShadow = '0 0 30px currentColor, 0 0 60px currentColor';
+                icon.style.transform = 'scale(1.2)';
+                icon.style.transition = 'all 0.3s';
             });
             
             card.addEventListener('mouseleave', function() {
                 const icon = this.querySelector('.resource-icon i');
-                icon.style.textShadow = '0 0 25px var(--gold)';
-                icon.style.transform = 'scale(1) rotate(0deg)';
-                icon.style.color = 'var(--gold)';
+                icon.style.textShadow = 'none';
+                icon.style.transform = 'scale(1)';
             });
         });
 
-        // Add typing effect to hero bio
-        const heroBio = document.querySelector('.hero-bio');
-        if(heroBio) {
-            const text = heroBio.textContent;
-            heroBio.textContent = '';
+        // Add typing effect to loading screen
+        const loadingText = document.querySelector('.loading-text');
+        if(loadingText) {
+            const originalText = loadingText.textContent;
+            loadingText.textContent = '';
             let i = 0;
             
             const typeWriter = () => {
-                if (i < text.length) {
-                    heroBio.textContent += text.charAt(i);
+                if (i < originalText.length) {
+                    loadingText.textContent += originalText.charAt(i);
                     i++;
-                    setTimeout(typeWriter, 50);
+                    setTimeout(typeWriter, 100);
                 }
             };
             
-            setTimeout(typeWriter, 1500);
+            setTimeout(typeWriter, 500);
         }
 
-        // Add divine sparkle effect to CTA button
-        const ctaButton = document.querySelector('.cta-button');
-        if(ctaButton) {
-            ctaButton.addEventListener('mouseenter', function() {
-                const sparks = ['✨', '⭐', '🌟', '💫'];
-                for(let i = 0; i < 5; i++) {
-                    setTimeout(() => {
-                        const spark = document.createElement('span');
-                        spark.textContent = sparks[Math.floor(Math.random() * sparks.length)];
-                        spark.style.position = 'absolute';
-                        spark.style.fontSize = '1.5rem';
-                        spark.style.opacity = '0.8';
-                        spark.style.pointerEvents = 'none';
-                        spark.style.animation = 'sparkleFall 1s forwards';
-                        
-                        const x = Math.random() * this.offsetWidth;
-                        const y = Math.random() * this.offsetHeight;
-                        
-                        spark.style.left = `${x}px`;
-                        spark.style.top = `${y}px`;
-                        
-                        this.appendChild(spark);
-                        
-                        setTimeout(() => spark.remove(), 1000);
-                    }, i * 150);
-                }
+        // Add cyber sound effect on button hover
+        const buttons = document.querySelectorAll('.cta-button, .resource-btn, .contact-link');
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                // Create visual ripple effect
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = rect.width / 2 - size / 2;
+                const y = rect.height / 2 - size / 2;
+                
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
             });
-        }
+        });
 
-        // Add sparkle animation
+        // Add ripple animation
         const style = document.createElement('style');
         style.textContent = `
-            @keyframes sparkleFall {
-                0% { transform: translateY(0) scale(0.5); opacity: 0; }
-                50% { transform: translateY(-20px) scale(1); opacity: 1; }
-                100% { transform: translateY(40px) scale(0); opacity: 0; }
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
             }
         `;
         document.head.appendChild(style);
     </script>
 </body>
-                        </html>
+</html>
